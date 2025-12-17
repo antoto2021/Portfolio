@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Green Codex V3 : Encyclopédie & Collection</title>
+    <title>The Green Codex V4</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
@@ -32,25 +32,44 @@
         /* Inputs */
         .input-field { width: 100%; padding: 12px; border-radius: 0.75rem; border: 1px solid #e2e8f0; background: #fff; outline: none; transition: border-color 0.2s; }
         .input-field:focus { border-color: #10b981; ring: 2px solid #10b981; }
-        textarea.input-field { min-height: 100px; resize: vertical; }
+        textarea.input-field { min-height: 120px; resize: vertical; }
 
         /* Edit Mode Styles */
-        .editable-highlight { border: 2px dashed #F59E0B; cursor: text; padding: 2px; border-radius: 4px; position: relative; }
-        .editable-highlight:hover::after { content: '✎ Éditer'; position: absolute; top: -20px; right: 0; background: #F59E0B; color: white; font-size: 10px; padding: 2px 5px; border-radius: 4px; pointer-events: none; }
+        .editable-highlight { 
+            border: 2px dashed #F59E0B; 
+            cursor: text; 
+            border-radius: 4px; 
+            position: relative; 
+            background-color: rgba(254, 243, 199, 0.3);
+        }
+        .editable-highlight:hover::after { 
+            content: '✎ Modifier'; 
+            position: absolute; 
+            top: -20px; 
+            right: 0; 
+            background: #F59E0B; 
+            color: white; 
+            font-size: 10px; 
+            padding: 2px 6px; 
+            border-radius: 4px; 
+            pointer-events: none; 
+            z-index: 50;
+            font-weight: bold;
+        }
         .edit-mode-active body { border-top: 4px solid #F59E0B; }
 
         /* Titles Standardization */
         .section-title { font-size: 1.875rem; line-height: 2.25rem; font-weight: 700; color: #064E3B; margin-bottom: 1rem; }
     </style>
 </head>
-<body class="text-slate-800 pb-20">
+<body class="text-slate-800 pb-24">
 
     <!-- HEADER -->
     <header class="bg-gradient-to-r from-emerald-900 to-emerald-700 text-white p-6 shadow-lg sticky top-0 z-50 transition-colors" id="main-header">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div onclick="showView('home')" class="cursor-pointer">
-                <h1 class="text-2xl md:text-3xl font-black tracking-tight">GREEN <span class="text-emerald-300">CODEX</span></h1>
-                <p class="text-xs md:text-sm text-emerald-200">Encyclopédie & Portfolio</p>
+                <h1 class="text-2xl md:text-3xl font-black tracking-tight" data-editable="app_title">GREEN <span class="text-emerald-300">CODEX</span></h1>
+                <p class="text-xs md:text-sm text-emerald-200" data-editable="app_subtitle">Encyclopédie Cannabique & Portfolio Personnel</p>
             </div>
             <div class="flex gap-2">
                 <button onclick="toggleEditMode()" id="editModeBtn" class="bg-white/10 hover:bg-white/20 text-white px-3 py-2 rounded-lg text-sm font-bold transition flex items-center gap-2 border border-white/20">
@@ -61,7 +80,9 @@
                 </button>
             </div>
         </div>
-        <div id="edit-banner" class="hidden w-full bg-amber-500 text-white text-center text-xs font-bold py-1 mt-2 rounded">MODE ÉDITION ACTIF - Cliquez sur les textes pour les modifier</div>
+        <div id="edit-banner" class="hidden w-full bg-amber-500 text-white text-center text-xs font-bold py-1 mt-2 rounded shadow-inner">
+            MODE ÉDITION ACTIF - Cliquez sur n'importe quel texte pour le modifier.
+        </div>
     </header>
 
     <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-16">
@@ -69,32 +90,29 @@
         <!-- ==================== VIEW: HOME ==================== -->
         <div id="view-home" class="fade-in space-y-16">
             
-            <!-- 1. INTRO -->
+            <!-- 1. INTRO (ENRICHIE) -->
             <section class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-emerald-600">
                 <h2 class="section-title" data-editable="intro_title">1. L'Odyssée de la Plante</h2>
-                <p class="text-lg leading-relaxed text-slate-600" data-editable="intro_text">
-                    L'histoire du Cannabis est une symbiose millénaire entre l'homme et la nature. 
-                    D'un côté, la <strong>Weed</strong> (Fleur), cultivée pour s'adapter aux climats variés.
-                    De l'autre, le <strong>Hash</strong> (Résine), l'art de concentrer l'essence de la plante.
-                    Aujourd'hui, traditions et science se rencontrent.
-                </p>
+                <div class="text-lg leading-relaxed text-slate-600 space-y-4" data-editable="intro_text">
+                    <p>L'histoire du Cannabis Sativa L. est une épopée botanique qui traverse les millénaires. Des steppes d'Asie Centrale où elle fut domestiquée il y a plus de 10 000 ans, jusqu'aux laboratoires high-tech de Californie, cette plante a façonné des cultures entières.</p>
+                    <p>Historiquement, deux grandes traditions s'opposent et se complètent : la culture de la <strong>Fleur (Weed)</strong>, séchée et affinée pour ses arômes complexes, et l'art du <strong>Hashish</strong>, né au Moyen-Orient et en Asie, qui consiste à séparer mécaniquement les trichomes pour obtenir un concentré pur et stable.</p>
+                    <p>Aujourd'hui, nous vivons une renaissance. La science moderne permet de comprendre l'interaction subtile entre cannabinoïdes et terpènes, ouvrant la voie à des produits d'une pureté et d'une puissance jamais égalées.</p>
+                </div>
             </section>
 
             <!-- 2. MY COLLECTION -->
             <section id="my-collection-preview" class="bg-slate-900 rounded-2xl p-8 text-white relative overflow-hidden shadow-xl">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500 rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
-                
                 <div class="relative z-10">
                     <div class="flex justify-between items-end mb-6">
                         <div>
                             <h2 class="text-3xl font-bold text-white mb-2" data-editable="col_title">2. Ma Collection</h2>
-                            <p class="text-slate-400" data-editable="col_sub">Votre carnet de dégustation personnel.</p>
+                            <p class="text-slate-400" data-editable="col_sub">Votre carnet de dégustation et d'archivage personnel.</p>
                         </div>
                         <button onclick="showView('collection')" class="bg-emerald-500 hover:bg-emerald-400 text-white px-6 py-3 rounded-xl font-bold transition shadow-lg flex items-center gap-2">
                             <span>📂</span> Ouvrir Portfolio
                         </button>
                     </div>
-
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
                             <span class="text-slate-400 text-xs uppercase font-bold">Total Entrées</span>
@@ -116,76 +134,88 @@
                 </div>
             </section>
 
-            <!-- 3. FAMILLES -->
+            <!-- 3. FAMILLES (ENRICHIE) -->
             <section>
                 <div class="mb-8 border-b border-slate-200 pb-4">
                     <h2 class="section-title" data-editable="fam_title">3. Les Familles Fondamentales</h2>
-                    <p class="text-slate-600" data-editable="fam_desc">Explorez les standards de l'industrie.</p>
+                    <p class="text-slate-600 max-w-3xl" data-editable="fam_desc">
+                        Le marché moderne se divise en deux grands royaumes : la fleur brute et les extractions. Chacun possède ses méthodes, ses rituels et ses profils aromatiques distincts. Voici les standards de l'industrie actuelle.
+                    </p>
                 </div>
 
                 <!-- Hash -->
-                <h3 class="text-xl font-bold text-slate-700 mb-4 flex items-center">🧪 Concentrés (Hash)</h3>
+                <h3 class="text-xl font-bold text-slate-700 mb-4 flex items-center" data-editable="fam_sub1">🧪 Concentrés (Hash)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                     <div onclick="showDetail('hash_dry')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">🏜️</div> <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded h-fit">TRADITION</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-amber-600">Dry Sift</h3>
+                        <p class="text-sm text-slate-500 mt-2">Le tamisage à sec traditionnel.</p>
                     </div>
                     <div onclick="showDetail('hash_water')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">❄️</div> <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded h-fit">PURETÉ</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-blue-600">Ice-O-Lator</h3>
+                        <p class="text-sm text-slate-500 mt-2">Extraction à l'eau et glace (Solventless).</p>
                     </div>
                     <div onclick="showDetail('hash_rosin')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">🔥</div> <span class="text-xs font-bold text-purple-600 bg-purple-50 px-2 py-1 rounded h-fit">MODERNE</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-purple-600">Rosin</h3>
+                        <p class="text-sm text-slate-500 mt-2">Pression et chaleur uniquement.</p>
                     </div>
                 </div>
 
                 <!-- Weed -->
-                <h3 class="text-xl font-bold text-slate-700 mb-4 flex items-center">🌱 Fleur (Weed)</h3>
+                <h3 class="text-xl font-bold text-slate-700 mb-4 flex items-center" data-editable="fam_sub2">🌱 Fleur (Weed)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div onclick="showDetail('weed_indica')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-indigo-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">🏔️</div> <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-1 rounded h-fit">RELAX</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-indigo-600">Indica</h3>
+                        <p class="text-sm text-slate-500 mt-2">Structure compacte, effet corporel.</p>
                     </div>
                     <div onclick="showDetail('weed_sativa')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-yellow-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">☀️</div> <span class="text-xs font-bold text-yellow-600 bg-yellow-50 px-2 py-1 rounded h-fit">ÉNERGIE</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-yellow-600">Sativa</h3>
+                        <p class="text-sm text-slate-500 mt-2">Grande taille, effet cérébral.</p>
                     </div>
                     <div onclick="showDetail('weed_exotic')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-pink-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">🧬</div> <span class="text-xs font-bold text-pink-600 bg-pink-50 px-2 py-1 rounded h-fit">HYBRIDE</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-pink-600">Exotics</h3>
+                        <p class="text-sm text-slate-500 mt-2">Breeding moderne et goûts "dessert".</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. POTENCY -->
+            <!-- 4. POTENCY (ENRICHIE) -->
             <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
                     <h2 class="section-title" data-editable="potency_title">4. Échelle de Puissance</h2>
+                    <p class="text-slate-600 mb-4 text-sm" data-editable="potency_desc">Comparatif des taux moyens de THC observés en laboratoire.</p>
                     <div class="chart-container">
                         <canvas id="potencyChart"></canvas>
                     </div>
                 </div>
                 <div class="lg:col-span-1 bg-emerald-50 border-l-4 border-emerald-500 p-6 rounded-r-xl">
-                    <h4 class="font-bold text-emerald-900 text-lg mb-2" data-editable="didyouknow_title">Le Saviez-vous ?</h4>
-                    <p class="text-sm text-emerald-800" data-editable="didyouknow_text">
-                        L'effet ressenti dépend de l'<strong>Effet d'Entourage</strong> : la synergie entre cannabinoïdes et terpènes.
+                    <h4 class="font-bold text-emerald-900 text-lg mb-2" data-editable="didyouknow_title">Le Mythe du THC</h4>
+                    <p class="text-sm text-emerald-800 leading-relaxed" data-editable="didyouknow_text">
+                        Attention : un taux de THC élevé (80%+) ne garantit pas une expérience "meilleure". C'est l'<strong>Effet d'Entourage</strong> qui compte : la synergie complexe entre les cannabinoïdes (THC, CBD, CBG) et les terpènes (Limonène, Myrcène).
+                        <br><br>
+                        Imaginez le THC comme le moteur d'une voiture, et les terpènes comme le volant et les pneus qui déterminent la tenue de route et la direction du voyage.
                     </p>
                 </div>
             </section>
 
             <!-- 5. COMPARATOR -->
             <section class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
-                <h2 class="section-title" data-editable="comp_title">5. Comparateur</h2>
+                <h2 class="section-title" data-editable="comp_title">5. Comparateur Interactif</h2>
+                <p class="text-slate-600 mb-6" data-editable="comp_desc">Sélectionnez deux produits pour visualiser leurs différences de profil organoleptique et d'effet.</p>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="space-y-6 flex flex-col justify-center bg-slate-50 p-6 rounded-xl">
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Produit A</label>
-                            <select id="selectA" class="w-full p-3 rounded border border-slate-300 bg-white outline-none" onchange="updateComparator()"></select>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Produit A (Zone Bleue)</label>
+                            <select id="selectA" class="w-full p-3 rounded border border-slate-300 bg-white outline-none focus:ring-2 focus:ring-blue-500" onchange="updateComparator()"></select>
                         </div>
                         <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Produit B</label>
-                            <select id="selectB" class="w-full p-3 rounded border border-slate-300 bg-white outline-none" onchange="updateComparator()"></select>
+                            <label class="block text-sm font-bold text-slate-700 mb-2">Produit B (Zone Rose)</label>
+                            <select id="selectB" class="w-full p-3 rounded border border-slate-300 bg-white outline-none focus:ring-2 focus:ring-pink-500" onchange="updateComparator()"></select>
                         </div>
                     </div>
                     <div class="md:col-span-2">
@@ -196,37 +226,73 @@
                 </div>
             </section>
 
-            <!-- 6. MATRIX -->
+            <!-- 6. MATRIX (ENRICHIE) -->
             <section class="bg-white p-6 rounded-xl shadow-md">
                 <h2 class="section-title" data-editable="matrix_title">6. Matrice : Texture vs Pureté</h2>
-                <p class="text-slate-600 mb-4" data-editable="matrix_desc">Le grand spectre des textures.</p>
+                <div class="mb-4 text-slate-600" data-editable="matrix_desc">
+                    <p>Ce graphique unique positionne chaque produit selon deux axes critiques :</p>
+                    <ul class="list-disc pl-5 mt-2 text-sm">
+                        <li><strong>Axe X (Pureté) :</strong> La concentration en têtes de trichomes (cannabinoïdes + terpènes) par rapport à la matière végétale inerte.</li>
+                        <li><strong>Axe Y (Texture) :</strong> De l'état solide (fleur) à l'état liquide (huile), en passant par les textures "beurre" ou "sable".</li>
+                    </ul>
+                </div>
                 <div id="globalMatrixPlot" class="w-full h-[500px]"></div>
             </section>
 
-            <!-- 7. LEXICON -->
+            <!-- 7. LEXICON (ENRICHIE) -->
             <section class="bg-slate-900 text-slate-300 p-8 rounded-xl">
-                <h2 class="section-title !text-white" data-editable="lex_title">7. Lexique</h2>
+                <h2 class="section-title !text-white" data-editable="lex_title">7. Lexique du Connaisseur</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-sm">
-                    <div><strong class="block text-emerald-400">Trichomes</strong>Glandes de résine.</div>
-                    <div><strong class="block text-emerald-400">Terpènes</strong>Molécules aromatiques.</div>
-                    <div><strong class="block text-emerald-400">Full Melt</strong>Fond sans résidu.</div>
-                    <div><strong class="block text-emerald-400">Solventless</strong>Extraction mécanique.</div>
+                    <div>
+                        <strong class="block text-emerald-400 text-lg mb-1">Trichomes</strong>
+                        <span data-editable="lex_1">Les glandes résineuses microscopiques en forme de champignon qui recouvrent la fleur. C'est l'usine chimique de la plante.</span>
+                    </div>
+                    <div>
+                        <strong class="block text-emerald-400 text-lg mb-1">Terpènes</strong>
+                        <span data-editable="lex_2">Composés aromatiques volatils (Limonène, Pinène...). Ils définissent l'odeur et orientent l'effet (sédatif ou stimulant).</span>
+                    </div>
+                    <div>
+                        <strong class="block text-emerald-400 text-lg mb-1">Full Melt</strong>
+                        <span data-editable="lex_3">Un gage de pureté extrême pour un hash (souvent Water Hash) qui fond totalement à la chaleur sans laisser aucun résidu (6 étoiles).</span>
+                    </div>
+                    <div>
+                        <strong class="block text-emerald-400 text-lg mb-1">Solventless</strong>
+                        <span data-editable="lex_4">Méthodes d'extraction mécaniques utilisant uniquement l'eau, la glace, la chaleur et la pression. Aucune chimie.</span>
+                    </div>
+                    <div>
+                        <strong class="block text-emerald-400 text-lg mb-1">Fresh Frozen</strong>
+                        <span data-editable="lex_5">Plante congelée immédiatement après récolte (sans séchage) pour préserver les terpènes volatils "vivants" (Live Resin/Rosin).</span>
+                    </div>
+                    <div>
+                        <strong class="block text-emerald-400 text-lg mb-1">Curing</strong>
+                        <span data-editable="lex_6">Processus d'affinage lent en bocal hermétique. Crucial pour stabiliser l'humidité et développer la complexité aromatique.</span>
+                    </div>
+                    <div>
+                        <strong class="block text-emerald-400 text-lg mb-1">Pheno Hunting</strong>
+                        <span data-editable="lex_7">L'art de sélectionner la meilleure plante (le meilleur phénotype) parmi des centaines de graines d'une même variété.</span>
+                    </div>
+                    <div>
+                        <strong class="block text-emerald-400 text-lg mb-1">Wash</strong>
+                        <span data-editable="lex_8">Action de laver la matière végétale dans de l'eau glacée pour en détacher les trichomes (pour faire du Bubble Hash).</span>
+                    </div>
                 </div>
             </section>
 
             <!-- DYNAMIC SECTIONS CONTAINER -->
             <div id="custom-sections-container" class="space-y-16"></div>
 
-            <!-- ADD SECTION BUTTON (Edit Mode Only) -->
-            <div id="add-section-area" class="hidden text-center py-10 border-t border-dashed border-slate-300">
-                <button onclick="openSectionModal()" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-bold shadow-lg transition transform hover:scale-105">
-                    + Ajouter une Section
+            <!-- ADD SECTION BUTTON (Visible only in Edit Mode) -->
+            <div id="add-section-area" class="hidden text-center py-10 border-t-2 border-dashed border-slate-300 mt-12">
+                <p class="text-slate-400 mb-4 text-sm font-bold uppercase tracking-widest">Zone de Personnalisation</p>
+                <button onclick="openSectionModal()" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full font-bold shadow-lg transition transform hover:scale-105 flex items-center gap-2 mx-auto">
+                    <span>➕</span> Ajouter une Nouvelle Section
                 </button>
             </div>
         </div>
 
 
         <!-- ==================== VIEW: DETAIL (ENCYCLOPEDIA) ==================== -->
+        <!-- (Code identique à la V3 pour cette vue, conservé pour fonctionnement) -->
         <div id="view-detail" class="hidden fade-in space-y-8 pb-12">
             <div id="detail-header" class="bg-white p-8 rounded-2xl shadow-lg border-t-8">
                 <div class="flex justify-between items-center mb-6">
@@ -310,7 +376,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-slate-500 uppercase">Pays</label>
-                        <input type="text" name="country" id="inp-country" class="input-field" placeholder="ex: Espagne">
+                        <input type="text" name="country" id="inp-country" class="input-field" placeholder="ex: Pays-Bas">
                     </div>
                     <div class="space-y-1">
                         <label class="text-xs font-bold text-slate-500 uppercase">Prix (€)</label>
@@ -342,23 +408,28 @@
     <!-- MODAL NEW SECTION -->
     <div id="section-modal" class="hidden fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6">
-            <h3 class="text-2xl font-bold text-slate-800 mb-6">Ajouter une Section</h3>
+            <h3 class="text-2xl font-bold text-slate-800 mb-6" id="section-modal-title">Ajouter une Section</h3>
             <form id="section-form" onsubmit="handleSectionSubmit(event)" class="space-y-4">
+                <input type="hidden" name="secId" id="sec-id"> <!-- Hidden ID for editing -->
+                
                 <div class="space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase">Titre</label>
-                    <input type="text" name="secTitle" class="input-field font-bold" required>
+                    <input type="text" name="secTitle" id="sec-title" class="input-field font-bold" required>
                 </div>
                 <div class="space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase">Contenu</label>
-                    <textarea name="secText" class="input-field" required></textarea>
+                    <textarea name="secText" id="sec-text" class="input-field" required></textarea>
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Image (Optionnel)</label>
+                    <label class="text-xs font-bold text-slate-500 uppercase">Image d'illustration (Optionnel)</label>
                     <input type="file" id="sec-photo-input" class="input-field" accept="image/*">
+                    <div id="sec-current-image" class="mt-2 hidden">
+                        <img src="" class="h-20 rounded border">
+                    </div>
                 </div>
                 <div class="flex gap-3 pt-4">
                     <button type="button" onclick="closeSectionModal()" class="flex-1 py-3 rounded-xl border border-slate-300 text-slate-500 font-bold">Annuler</button>
-                    <button type="submit" class="flex-1 py-3 rounded-xl bg-amber-500 text-white font-bold hover:bg-amber-600">Ajouter</button>
+                    <button type="submit" class="flex-1 py-3 rounded-xl bg-amber-500 text-white font-bold hover:bg-amber-600">Enregistrer</button>
                 </div>
             </form>
         </div>
@@ -376,12 +447,13 @@
             weed_exotic: { name: "Exotics", color: "pink", hex: "#DB2777", badge: "Hybride", icon: "🧬", desc: "Breeding US moderne.", process: [{t:"Origine",d:"Indoor"},{t:"Structure",d:"Optimisée"},{t:"Flo",d:"9 sem"},{t:"Effet",d:"Mixte"}], radar: [80,50,60,80,50], metrics: [75,28,60,70], metricsLabels: ['Rendement','THC','Taille','Facilité'], matrix: {x:28,y:10} }
         };
 
-        let collection = JSON.parse(localStorage.getItem('green_codex_collection') || '[]');
-        let contentMap = JSON.parse(localStorage.getItem('green_codex_content') || '{}');
-        let customSections = JSON.parse(localStorage.getItem('green_codex_custom_sections') || '[]');
+        let collection = JSON.parse(localStorage.getItem('green_codex_collection_v4') || '[]');
+        let contentMap = JSON.parse(localStorage.getItem('green_codex_content_v4') || '{}');
+        let customSections = JSON.parse(localStorage.getItem('green_codex_custom_sections_v4') || '[]');
         
         let isEditMode = false;
         let currentPhotos = [];
+        let currentSectionImage = null;
 
         // --- NAVIGATION ---
         function showView(viewId) {
@@ -414,7 +486,7 @@
             });
         }
 
-        // --- EDIT MODE LOGIC ---
+        // --- GLOBAL TEXT EDIT LOGIC ---
         function toggleEditMode() {
             isEditMode = !isEditMode;
             document.body.classList.toggle('edit-mode-active', isEditMode);
@@ -422,26 +494,32 @@
             document.getElementById('editModeBtn').classList.toggle('bg-amber-500', isEditMode);
             document.getElementById('add-section-area').classList.toggle('hidden', !isEditMode);
             
-            document.querySelectorAll('[data-editable]').forEach(el => {
+            // Attach/Detach generic listeners
+            const elements = document.querySelectorAll('[data-editable]');
+            elements.forEach(el => {
                 if(isEditMode) {
                     el.classList.add('editable-highlight');
-                    el.onclick = (e) => editContent(e.target);
+                    el.onclick = (e) => { e.preventDefault(); e.stopPropagation(); editContent(e.target.closest('[data-editable]')); };
                 } else {
                     el.classList.remove('editable-highlight');
                     el.onclick = null;
                 }
             });
-            renderCustomSections();
+            renderCustomSections(); // Re-render to show/hide edit buttons
         }
 
         function editContent(el) {
-            if(!isEditMode) return;
+            if(!isEditMode || !el) return;
             const key = el.getAttribute('data-editable');
-            const newText = prompt("Modifier le texte :", el.innerText);
-            if(newText !== null) {
+            // If it's a paragraph with HTML, we try to preserve basics, but prompt is simple text.
+            const currentText = el.innerText;
+            const newText = prompt("Modifier le texte :", currentText);
+            
+            if(newText !== null && newText !== currentText) {
+                // If it was a list or complex HTML, this simplifies it to text. OK for this use case.
                 el.innerText = newText;
                 contentMap[key] = newText;
-                localStorage.setItem('green_codex_content', JSON.stringify(contentMap));
+                localStorage.setItem('green_codex_content_v4', JSON.stringify(contentMap));
             }
         }
 
@@ -453,9 +531,32 @@
             renderCustomSections();
         }
 
-        // --- SECTION MODAL LOGIC ---
-        function openSectionModal() {
-            document.getElementById('section-form').reset();
+        // --- CUSTOM SECTIONS LOGIC (Updated for Edit) ---
+        
+        function openSectionModal(editId = null) {
+            const form = document.getElementById('section-form');
+            form.reset();
+            currentSectionImage = null;
+            document.getElementById('sec-current-image').classList.add('hidden');
+            
+            if (editId) {
+                const section = customSections.find(s => s.id === editId);
+                if (section) {
+                    document.getElementById('section-modal-title').innerText = "Modifier la Section";
+                    document.getElementById('sec-id').value = section.id;
+                    document.getElementById('sec-title').value = section.title;
+                    document.getElementById('sec-text').value = section.text;
+                    if(section.image) {
+                        currentSectionImage = section.image;
+                        document.querySelector('#sec-current-image img').src = section.image;
+                        document.getElementById('sec-current-image').classList.remove('hidden');
+                    }
+                }
+            } else {
+                document.getElementById('section-modal-title').innerText = "Ajouter une Section";
+                document.getElementById('sec-id').value = "";
+            }
+            
             document.getElementById('section-modal').classList.remove('hidden');
         }
 
@@ -466,30 +567,44 @@
         async function handleSectionSubmit(e) {
             e.preventDefault();
             const form = e.target;
+            const id = form.secId.value ? parseInt(form.secId.value) : Date.now();
             const title = form.secTitle.value;
             const text = form.secText.value;
             const fileInput = document.getElementById('sec-photo-input');
-            let image = null;
-
+            
+            // Check image
             if (fileInput.files.length > 0) {
-                image = await compressImage(fileInput.files[0]);
+                try {
+                    currentSectionImage = await compressImage(fileInput.files[0]);
+                } catch(err) {
+                    alert("Erreur image");
+                    return;
+                }
+            }
+
+            const newSection = { id, title, text, image: currentSectionImage };
+
+            // Update or Add
+            const existingIdx = customSections.findIndex(s => s.id === id);
+            if (existingIdx > -1) {
+                customSections[existingIdx] = newSection;
+            } else {
+                customSections.push(newSection);
             }
             
-            customSections.push({ title, text, image, id: Date.now() });
             try {
-                localStorage.setItem('green_codex_custom_sections', JSON.stringify(customSections));
+                localStorage.setItem('green_codex_custom_sections_v4', JSON.stringify(customSections));
                 renderCustomSections();
                 closeSectionModal();
             } catch (err) {
-                alert("Erreur de stockage : Image trop lourde ou espace plein.");
-                customSections.pop(); // Revert
+                alert("Espace de stockage plein !");
             }
         }
 
         function deleteCustomSection(id) {
             if(!confirm("Supprimer cette section ?")) return;
             customSections = customSections.filter(s => s.id !== id);
-            localStorage.setItem('green_codex_custom_sections', JSON.stringify(customSections));
+            localStorage.setItem('green_codex_custom_sections_v4', JSON.stringify(customSections));
             renderCustomSections();
         }
 
@@ -497,25 +612,27 @@
             const container = document.getElementById('custom-sections-container');
             container.innerHTML = '';
             customSections.forEach((sec, index) => {
+                // Strict adherence to visual charter: bg-white, rounded-2xl, shadow-md, border-emerald
                 const html = `
                     <section class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-emerald-600 relative group animate-fade-in">
-                        ${isEditMode ? `<button onclick="deleteCustomSection(${sec.id})" class="absolute top-4 right-4 text-red-500 font-bold border border-red-200 px-3 py-1 rounded hover:bg-red-50 text-xs transition">Supprimer</button>` : ''}
+                        ${isEditMode ? `
+                            <div class="absolute top-4 right-4 flex gap-2">
+                                <button onclick="openSectionModal(${sec.id})" class="text-blue-500 font-bold border border-blue-200 px-3 py-1 rounded hover:bg-blue-50 text-xs transition">Modifier</button>
+                                <button onclick="deleteCustomSection(${sec.id})" class="text-red-500 font-bold border border-red-200 px-3 py-1 rounded hover:bg-red-50 text-xs transition">Supprimer</button>
+                            </div>
+                        ` : ''}
                         <h2 class="section-title">${index + 8}. ${sec.title}</h2>
                         ${sec.image ? `<img src="${sec.image}" class="w-full max-h-96 object-cover rounded-xl mb-6 shadow-sm">` : ''}
-                        <p class="text-lg leading-relaxed text-slate-600 whitespace-pre-wrap">${sec.text}</p>
+                        <div class="text-lg leading-relaxed text-slate-600 whitespace-pre-wrap">${sec.text}</div>
                     </section>
                 `;
                 container.insertAdjacentHTML('beforeend', html);
             });
         }
 
-        // --- CHARTS & COMPARATOR (UNCHANGED LOGIC) ---
+        // --- CHARTS (UNCHANGED) ---
         const initCharts = () => {
-            new Chart(document.getElementById('potencyChart'), {
-                type: 'bar',
-                data: { labels: ['Sativa', 'Indica', 'Exotic', 'Dry Sift', 'Ice-O-Lator', 'Rosin', 'BHO'], datasets: [{ label: '% THC', data: [15,20,28,40,65,75,90], backgroundColor: ['#10B981','#10B981','#10B981','#D97706','#2563EB','#9333EA','#64748B'], borderRadius: 4 }] },
-                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: {legend:false} }
-            });
+            new Chart(document.getElementById('potencyChart'), { type: 'bar', data: { labels: ['Sativa', 'Indica', 'Exotic', 'Dry Sift', 'Ice-O-Lator', 'Rosin', 'BHO'], datasets: [{ label: '% THC', data: [15,20,28,40,65,75,90], backgroundColor: ['#10B981','#10B981','#10B981','#D97706','#2563EB','#9333EA','#64748B'], borderRadius: 4 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: {legend:false} } });
             const sA = document.getElementById('selectA'), sB = document.getElementById('selectB');
             Object.keys(masterData).forEach(k => { sA.add(new Option(masterData[k].name, k)); sB.add(new Option(masterData[k].name, k)); });
             sA.value = "weed_sativa"; sB.value = "hash_rosin";
@@ -527,11 +644,7 @@
         function updateComparator() {
             const dA = masterData[document.getElementById('selectA').value], dB = masterData[document.getElementById('selectB').value];
             if(comparatorChart) comparatorChart.destroy();
-            comparatorChart = new Chart(document.getElementById('comparatorRadar'), {
-                type: 'radar',
-                data: { labels: ['Fruité', 'Terreux', 'Physique', 'Odeur', 'Intensité'], datasets: [ { label: dA.name, data: dA.radar, borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.2)' }, { label: dB.name, data: dB.radar, borderColor: '#EC4899', backgroundColor: 'rgba(236,72,153,0.2)' } ] },
-                options: { responsive: true, maintainAspectRatio: false, scales: { r: { suggestedMin:0, suggestedMax:100 } } }
-            });
+            comparatorChart = new Chart(document.getElementById('comparatorRadar'), { type: 'radar', data: { labels: ['Fruité', 'Terreux', 'Physique', 'Odeur', 'Intensité'], datasets: [ { label: dA.name, data: dA.radar, borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.2)' }, { label: dB.name, data: dB.radar, borderColor: '#EC4899', backgroundColor: 'rgba(236,72,153,0.2)' } ] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { suggestedMin:0, suggestedMax:100 } } } });
         }
         function showDetail(key) {
             const d = masterData[key];
@@ -551,16 +664,15 @@
             cvs2.chart = new Chart(cvs2, { type: 'bar', data: { labels: ['Rendement','Puissance','Prix','Tech'], datasets: [{ data: d.metrics, backgroundColor: d.hex, borderRadius: 6 }] }, options: { maintainAspectRatio: false, plugins: {legend:false}, scales: {y:{max:100}} } });
         }
 
-        // --- COLLECTION MANAGER (FIXED: COMPRESSION + ERROR HANDLING) ---
+        // --- COLLECTION MANAGER ---
 
         function saveCollection() {
             try {
-                localStorage.setItem('green_codex_collection', JSON.stringify(collection));
+                localStorage.setItem('green_codex_collection_v4', JSON.stringify(collection));
                 updateDashboardStats();
                 renderCollectionList();
             } catch (e) {
-                alert("Espace de stockage plein ! Essayez de supprimer des éléments ou de réduire la taille des photos.");
-                // Revert change if possible, or just alert
+                alert("Espace de stockage plein ! Réduisez les photos.");
             }
         }
 
@@ -574,8 +686,14 @@
 
         function getFlag(c) { 
             if(!c) return '🏳️'; 
-            const m = {'france':'🇫🇷','espagne':'🇪🇸','usa':'🇺🇸','cali':'🇺🇸','maroc':'🇲🇦','suisse':'🇨🇭','italie':'🇮🇹','canada':'🇨🇦','uk':'🇬🇧','allemagne':'🇩🇪','thailande':'🇹🇭'};
-            for(let k in m) if(c.toLowerCase().includes(k)) return m[k];
+            const m = {
+                'france':'🇫🇷','espagne':'🇪🇸','spain':'🇪🇸','usa':'🇺🇸','cali':'🇺🇸','maroc':'🇲🇦','morocco':'🇲🇦',
+                'suisse':'🇨🇭','italie':'🇮🇹','canada':'🇨🇦','uk':'🇬🇧','angleterre':'🇬🇧','allemagne':'🇩🇪',
+                'thailande':'🇹🇭','pays-bas':'🇳🇱','hollande':'🇳🇱','netherlands':'🇳🇱','belgique':'🇧🇪'
+            };
+            // Recherche partielle
+            const lower = c.toLowerCase();
+            for(let k in m) if(lower.includes(k)) return m[k];
             return '🏳️';
         }
 
@@ -616,7 +734,7 @@
             });
         }
 
-        // --- FORM HANDLING (COMPRESSED) ---
+        // --- FORM HANDLING ---
 
         function openCollectionForm(editIndex = -1) {
             const form = document.getElementById('collection-form');
@@ -657,11 +775,9 @@
             if (input.files) {
                 const remainingSlots = 3 - currentPhotos.length;
                 if(remainingSlots <= 0) { alert("Max 3 photos !"); return; }
-                
                 const files = Array.from(input.files).slice(0, remainingSlots);
                 for (const file of files) {
-                    const compressed = await compressImage(file);
-                    currentPhotos.push(compressed);
+                    try { const compressed = await compressImage(file); currentPhotos.push(compressed); } catch(e) {}
                 }
                 renderPhotoPreviews();
             }
