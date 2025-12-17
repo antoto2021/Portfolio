@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Green Codex V2 : Encyclopédie & Collection</title>
+    <title>The Green Codex : Encyclopédie & Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
@@ -430,10 +430,11 @@
             const container = document.getElementById('custom-sections-container');
             container.innerHTML = '';
             customSections.forEach((sec, index) => {
+                // FIXED STYLE: Matches standard sections (border-emerald-600, section-title class)
                 const html = `
-                    <section class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-slate-500 relative group">
-                        ${isEditMode ? `<button onclick="deleteCustomSection(${sec.id})" class="absolute top-4 right-4 text-red-500 font-bold border border-red-200 px-2 rounded hover:bg-red-50">Supprimer</button>` : ''}
-                        <h2 class="section-title text-slate-700">${index + 8}. ${sec.title}</h2>
+                    <section class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-emerald-600 relative group animate-fade-in">
+                        ${isEditMode ? `<button onclick="deleteCustomSection(${sec.id})" class="absolute top-4 right-4 text-red-500 font-bold border border-red-200 px-3 py-1 rounded hover:bg-red-50 text-xs transition">Supprimer</button>` : ''}
+                        <h2 class="section-title">${index + 8}. ${sec.title}</h2>
                         <p class="text-lg leading-relaxed text-slate-600">${sec.text}</p>
                     </section>
                 `;
@@ -545,7 +546,7 @@
             });
         }
 
-        // --- FORM HANDLING (NEW: Multi Photos + Edit) ---
+        // --- FORM HANDLING (MULTI PHOTOS & EDIT) ---
 
         function openCollectionForm(editIndex = -1) {
             const form = document.getElementById('collection-form');
@@ -561,7 +562,7 @@
                 document.getElementById('inp-strain').value = item.strain;
                 document.getElementById('inp-commercialName').value = item.commercialName;
                 document.getElementById('inp-country').value = item.country;
-                document.getElementById('inp-farm').value = item.farm;
+                if(item.farm) document.getElementById('inp-farm').value = item.farm; // Fixed missing ID
                 document.getElementById('inp-price').value = item.price;
                 if(item.type) document.getElementById('inp-hashType').value = item.type;
                 toggleFormFields(item.category);
