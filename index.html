@@ -74,6 +74,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 0; /* AJOUT : Supprime les marges internes par défaut sur mobile */
+            margin: 0;  /* AJOUT : Sécurité pour le positionnement */
+            line-height: 1; /* AJOUT : Centre verticalement le caractère Unicode */
             transition: background-color 0.3s;
             outline: none;
             -webkit-tap-highlight-color: transparent;
@@ -226,13 +229,13 @@
                     <div onclick="showDetail('weed_sativa')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-yellow-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">☀️</div> <span class="text-xs font-bold text-yellow-600 bg-yellow-50 px-2 py-1 rounded h-fit">ÉNERGIE</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-yellow-600">Sativa</h3>
-                        <p class="text-sm text-slate-500 mt-2">C'est une variété originaire des régions tropicales. Grande et élancée, elle possède des feuilles fines et des cycles de floraison longs. Elle est recherchée 
+                        <p class="text-sm text-slate-500 text-justify mt-2">C'est une variété originaire des régions tropicales. Grande et élancée, elle possède des feuilles fines et des cycles de floraison longs. Elle est recherchée 
                             pour ses effets stimulants et cérébraux ("high"), favorisant la créativité, l'énergie et la concentration.</p>
                     </div>
                     <div onclick="showDetail('weed_exotic')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-pink-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">🧬</div> <span class="text-xs font-bold text-pink-600 bg-pink-50 px-2 py-1 rounded h-fit">HYBRIDE</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-pink-600">Exotics</h3>
-                        <p class="text-sm text-slate-500 mt-2">Elle désigne des variétés de cannabis haut de gamme, souvent issues de croisements complexes aux États-Unis. Elles se distinguent par des couleurs vibrantes, 
+                        <p class="text-sm text-slate-500 text-justify mt-2">Elle désigne des variétés de cannabis haut de gamme, souvent issues de croisements complexes aux États-Unis. Elles se distinguent par des couleurs vibrantes, 
                             des arômes intenses et uniques, ainsi qu'une puissance élevée. C'est le segment « luxe » du marché, privilégiant la qualité visuelle et gustative.</p>
                     </div>
                 </div>
@@ -294,8 +297,12 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-sm text-justify">
                     <div><strong class="block text-emerald-400 mb-1">Trichomes</strong><span data-editable="lex_1">Les glandes résineuses microscopiques en forme de champignon qui recouvrent la fleur. C'est l'usine chimique de la plante.</span></div>
                     <div><strong class="block text-emerald-400 mb-1">Terpènes</strong><span data-editable="lex_2">Composés aromatiques volatils (Limonène, Pinène...). Ils définissent l'odeur et orientent l'effet (sédatif ou stimulant).</span></div>
-                    <div><strong class="block text-emerald-400 mb-1">Full Melt</strong><span data-editable="lex_3">Fond sans résidu.</span></div>
-                    <div><strong class="block text-emerald-400 mb-1">Solventless</strong><span data-editable="lex_4">Sans solvants.</span></div>
+                    <div><strong class="block text-emerald-400 mb-1">Full Melt</strong><span data-editable="lex_3">Un gage de pureté extrême pour un hash (souvent Water Hash) qui fond totalement à la chaleur sans laisser aucun résidu (6 étoiles).</span></div>
+                    <div><strong class="block text-emerald-400 mb-1">Solventless</strong><span data-editable="lex_4">Méthodes d'extraction mécaniques utilisant uniquement l'eau, la glace, la chaleur et la pression. Aucune chimie.</span></div>
+                    <div><strong class="block text-emerald-400 mb-1">Fresh Frozen</strong><span data-editable="lex_5">Plante congelée immédiatement après récolte (sans séchage) pour préserver les terpènes volatils "vivants" (Live Resin/Rosin).</span></div>
+                    <div><strong class="block text-emerald-400 mb-1">Curing</strong><span data-editable="lex_6">Processus d'affinage lent en bocal hermétique. Crucial pour stabiliser l'humidité et développer la complexité aromatique.</span></div>
+                    <div><strong class="block text-emerald-400 mb-1">Pheno Hunting</strong><span data-editable="lex_7">L'art de sélectionner la meilleure plante (le meilleur phénotype) parmi des centaines de graines d'une même variété.</span></div>
+                    <div><strong class="block text-emerald-400 mb-1">Wash</strong><span data-editable="lex_8">Action de laver la matière végétale dans de l'eau glacée pour en détacher les trichomes (pour faire du Bubble Hash).</span></div>
                 </div>
             </section>
 
