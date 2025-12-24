@@ -176,15 +176,20 @@
         <!-- ==================== VIEW: HOME ==================== -->
         <div id="view-home" class="fade-in space-y-16">
             
-            <!-- INTRO (FULL TEXT RESTORED) -->
+            <!-- INTRO (MODIFIÉ: Premier paragraphe visible) -->
             <section id="intro-card" class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-emerald-600 relative group transition-all duration-300">
                 <div class="flex items-center gap-2 mb-2 cursor-pointer" onclick="toggleSection('intro-card')">
                     <h2 class="section-title mb-0" data-editable="intro_title">L'Odyssée de la Plante</h2>
                 </div>
+                
+                <!-- Partie toujours visible (Teaser) -->
+                <div class="text-lg leading-relaxed text-slate-600 text-justify mb-4" data-editable="intro_teaser">
+                    <p>L'histoire du <strong>Cannabis Sativa L.</strong> est une épopée botanique et culturelle qui traverse les millénaires. Née dans les steppes d'Asie Centrale, probablement près du plateau tibétain, cette plante a été domestiquée par l'homme il y a plus de 10 000 ans, initialement pour ses fibres robustes et ses graines nutritives.</p>
+                </div>
+
+                <!-- Partie repliable -->
                 <div class="collapsible-wrapper">
                     <div class="text-lg leading-relaxed text-slate-600 space-y-4 text-justify" data-editable="intro_text">
-                        <p>L'histoire du <strong>Cannabis Sativa L.</strong> est une épopée botanique et culturelle qui traverse les millénaires. Née dans les steppes d'Asie Centrale, probablement près du plateau tibétain, cette plante a été domestiquée par l'homme il y a plus de 10 000 ans, initialement pour ses fibres robustes et ses graines nutritives.</p>
-                        
                         <p>Au fil des siècles, la plante a voyagé le long des routes de la soie, s'adaptant à divers climats pour donner naissance à deux grandes lignées : les variétés tropicales, élancées et énergisantes (Sativa), et les variétés de montagne, trapues et résineuses (Indica). Cette diversité génétique est aujourd'hui la base de milliers d'hybrides modernes.</p>
                         
                         <p>Historiquement, deux grandes traditions de consommation s'opposent et se complètent. D'un côté, la culture de la <strong>Fleur (Weed)</strong>, séchée avec soin pour préserver ses arômes délicats. De l'autre, l'art ancestral du <strong>Hashish</strong>, perfectionné au Moyen-Orient et en Asie (Maroc, Afghanistan, Népal), qui consiste à séparer mécaniquement les trichomes pour obtenir un concentré pur, stable et puissant.</p>
@@ -192,12 +197,13 @@
                         <p>Aujourd'hui, nous vivons une véritable renaissance cannabique. La science moderne nous permet enfin de décrypter l'interaction subtile entre les cannabinoïdes (THC, CBD...) et les terpènes (les molécules aromatiques). Cette application, le Green Codex, est conçue pour vous guider dans cette nouvelle ère, vous aidant à comprendre, archiver et apprécier la complexité de chaque produit.</p>
                     </div>
                 </div>
+                
                 <button onclick="toggleSection('intro-card')" class="absolute bottom-2 left-2 text-emerald-600 p-2 hover:bg-emerald-50 rounded-full transition">
                     <svg class="w-6 h-6 toggle-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
             </section>
 
-            <!-- MY COLLECTION PREVIEW -->
+            <!-- MY COLLECTION PREVIEW (MODIFIÉ: Indicateur espace) -->
             <section id="my-collection-preview" class="bg-slate-900 rounded-2xl p-8 text-white relative overflow-hidden shadow-xl">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500 rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
                 <div class="relative z-10">
@@ -205,7 +211,7 @@
                         <div>
                             <h2 class="text-3xl font-bold text-white mb-2" data-editable="col_title">My Collection</h2>
                             <p class="text-slate-400" data-editable="col_sub">Votre carnet de dégustation et d'archivage personnel.</p>
-                            <p class="text-xs text-slate-500 mt-1">Stockage : <span id="storageLabel" class="font-bold text-emerald-400">IndexedDB (Illimité)</span></p>
+                            <p class="text-xs text-slate-500 mt-1">Stockage : <span class="font-bold text-emerald-400">IndexedDB (Illimité)</span> <span id="storage-used" class="ml-2 text-slate-400 text-[10px] uppercase font-bold tracking-wider opacity-80">(Calcul...)</span></p>
                         </div>
                         <button onclick="showView('collection')" class="bg-emerald-500 hover:bg-emerald-400 text-white px-6 py-3 rounded-xl font-bold transition shadow-lg flex items-center gap-2">
                             <span>📂</span> Ouvrir Portfolio
@@ -232,7 +238,7 @@
                 </div>
             </section>
 
-            <!-- FAMILIES SECTION (FULL TEXT RESTORED) -->
+            <!-- FAMILIES SECTION -->
             <section>
                 <div class="mb-8 border-b border-slate-200 pb-4">
                     <h2 class="section-title" data-editable="fam_title">Les Familles Fondamentales</h2>
@@ -286,7 +292,7 @@
                 </div>
             </section>
 
-            <!-- POTENCY (FULL TEXT RESTORED) -->
+            <!-- POTENCY -->
             <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
                     <h2 class="section-title" data-editable="potency_title">Échelle de Puissance</h2>
@@ -324,7 +330,7 @@
                 <div id="globalMatrixPlot" class="w-full h-[500px]"></div>
             </section>
 
-            <!-- LEXICON (FULL RESTORED) -->
+            <!-- LEXICON -->
             <section class="bg-slate-900 text-slate-300 p-8 rounded-xl">
                 <h2 class="section-title !text-white" data-editable="lex_title">Lexique du Connaisseur</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-sm text-justify">
@@ -389,7 +395,7 @@
             </div>
         </div>
 
-        <!-- ==================== VIEW: INFO (FULL TEXT) ==================== -->
+        <!-- ==================== VIEW: INFO ==================== -->
         <div id="view-info" class="hidden fade-in space-y-8">
             <div class="bg-white p-6 rounded-2xl shadow-lg border-l-8 border-emerald-600">
                 <h2 class="text-2xl font-black text-slate-800 mb-6 flex items-center gap-3">
@@ -764,6 +770,22 @@
             renderCustomSections();
         }
 
+        // --- STORAGE CALCULATOR ---
+        function calculateStorageUsage() {
+            // Estimation simple basée sur les objets en mémoire (plus rapide que requêter la DB)
+            const colSize = new Blob([JSON.stringify(collection)]).size;
+            const configSize = new Blob([JSON.stringify(contentMap)]).size + new Blob([JSON.stringify(customSections)]).size;
+            const totalBytes = colSize + configSize;
+
+            let sizeStr = "";
+            if(totalBytes < 1024) sizeStr = totalBytes + " B";
+            else if(totalBytes < 1024 * 1024) sizeStr = (totalBytes / 1024).toFixed(1) + " Ko";
+            else sizeStr = (totalBytes / (1024 * 1024)).toFixed(2) + " Mo";
+
+            const el = document.getElementById('storage-used');
+            if(el) el.innerText = `(${sizeStr} utilisés)`;
+        }
+
         // --- COLLECTION LOGIC WITH INDEXEDDB ---
         
         async function saveCollectionItem(item) {
@@ -790,6 +812,8 @@
             document.getElementById('stats-weed').innerText = collection.filter(i => i.category === 'weed').length;
             document.getElementById('stats-hash').innerText = collection.filter(i => i.category === 'hash').length;
             document.getElementById('stats-mass').innerText = collection.reduce((acc, curr) => acc + (parseFloat(curr.quantity) || 0), 0).toFixed(1) + 'g';
+            // Update Storage Display
+            calculateStorageUsage();
         }
 
         function renderCollectionList() {
