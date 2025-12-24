@@ -61,7 +61,7 @@
         #refreshBtn {
             background-color: #166534; /* Green Codex Dark Green */
             color: white; border: none; border-radius: 50%;
-            width: 60px; height: 60px; font-size: 35px; cursor: pointer;
+            width: 60px; height: 60px; font-size: 40px; cursor: pointer;
             box-shadow: 0 4px 8px rgba(0,0,0,0.3); display: flex;
             justify-content: center; align-items: center; padding: 0; margin: 0;
             line-height: 1; transition: background-color 0.3s, transform 0.2s;
@@ -77,11 +77,11 @@
         
         #updateAlert { display: none; flex-direction: row; align-items: center; }
         .update-text {
-            color: #166534; font-weight: bold; font-size: 14px; margin-right: 5px;
+            color: #166534; font-weight: bold; font-size: 18px; margin-right: 5px;
             background: rgba(255,255,255,0.95); padding: 6px 10px; border-radius: 6px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .arrow-pointer { font-size: 24px; color: #166534; margin-right: 5px; }
+        .arrow-pointer { font-size: 30px; color: #166534; margin-right: 5px; }
         .bouncing { animation: bounceLeft 0.5s ease-in-out 4; }
         @keyframes bounceLeft { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-10px); } }
 
@@ -384,7 +384,7 @@
 
         <!-- ==================== VIEW: INFO (NEW) ==================== -->
         <div id="view-info" class="hidden fade-in space-y-8">
-            <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-blue-500">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-green-500">
                 <h2 class="text-3xl font-black text-slate-800 mb-6 flex items-center gap-3">
                     ℹ️ Informations Version
                 </h2>
@@ -402,7 +402,7 @@
 
                 <!-- Bloc Version GitHub -->
                 <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Dernière Version (<strong>GitHub</strong>)</h3>
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Dernière Version <strong>GitHub</strong></h3>
                     <div class="font-mono text-xl md:text-2xl font-bold text-slate-800 break-all" id="info-remote-hash">
                         Vérification...
                     </div>
