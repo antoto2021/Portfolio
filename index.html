@@ -57,9 +57,9 @@
             padding-bottom: 0;
         }
         .expanded .collapsible-wrapper {
-            max-height: 2000px; /* Valeur arbitraire haute pour permettre le contenu */
+            max-height: 2000px;
             opacity: 1;
-            padding-bottom: 20px; /* Espace pour la flèche */
+            padding-bottom: 20px;
         }
         .toggle-arrow {
             transition: transform 0.3s ease;
@@ -69,20 +69,15 @@
             transform: rotate(180deg);
         }
 
-        /* ============================================================
-           CSS DU SYSTÈME DE MISE À JOUR (Btn + Pop-up What's New)
-           ============================================================ */
-        
-        /* Bouton Refresh */
+        /* UPDATE SYSTEM STYLES */
         #updateContainer {
             position: fixed; bottom: 20px; right: 20px;
             display: flex; align-items: center; justify-content: flex-end;
             z-index: 9999; gap: 10px; font-family: Arial, sans-serif;
         }
         #refreshBtn {
-            background-color: #166534; /* Green Codex Dark Green */
-            color: white; border: none; border-radius: 50%;
-            width: 60px; height: 60px; font-size: 40px; cursor: pointer;
+            background-color: #166534; color: white; border: none; border-radius: 50%;
+            width: 60px; height: 60px; font-size: 35px; cursor: pointer;
             box-shadow: 0 4px 8px rgba(0,0,0,0.3); display: flex;
             justify-content: center; align-items: center; padding: 0; margin: 0;
             line-height: 1; transition: background-color 0.3s, transform 0.2s;
@@ -98,11 +93,11 @@
         
         #updateAlert { display: none; flex-direction: row; align-items: center; }
         .update-text {
-            color: #166534; font-weight: bold; font-size: 18px; margin-right: 5px;
+            color: #166534; font-weight: bold; font-size: 14px; margin-right: 5px;
             background: rgba(255,255,255,0.95); padding: 6px 10px; border-radius: 6px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .arrow-pointer { font-size: 30px; color: #166534; margin-right: 5px; }
+        .arrow-pointer { font-size: 24px; color: #166534; margin-right: 5px; }
         .bouncing { animation: bounceLeft 0.5s ease-in-out 4; }
         @keyframes bounceLeft { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(-10px); } }
 
@@ -160,11 +155,9 @@
                 <p class="text-xs md:text-sm text-emerald-200" data-editable="app_subtitle">Encyclopédie Cannabique & Collection Personnel</p>
             </div>
             <div class="flex gap-2">
-                <!-- Bouton INFO -->
                 <button onclick="showView('info')" class="bg-white/10 hover:bg-white/20 text-white w-10 h-10 rounded-lg text-lg font-bold transition flex items-center justify-center border border-white/20">
                     ℹ️
                 </button>
-                
                 <button onclick="toggleEditMode()" id="editModeBtn" class="bg-white/10 hover:bg-white/20 text-white px-3 py-2 rounded-lg text-sm font-bold transition flex items-center gap-2 border border-white/20">
                     <span>✏️</span> <span class="hidden md:inline">Mode Édition</span>
                 </button>
@@ -183,12 +176,11 @@
         <!-- ==================== VIEW: HOME ==================== -->
         <div id="view-home" class="fade-in space-y-16">
             
-            <!-- 1. INTRO (L'ODYSSEE) - MODIFIÉ -->
+            <!-- INTRO (FULL TEXT RESTORED) -->
             <section id="intro-card" class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-emerald-600 relative group transition-all duration-300">
                 <div class="flex items-center gap-2 mb-2 cursor-pointer" onclick="toggleSection('intro-card')">
                     <h2 class="section-title mb-0" data-editable="intro_title">L'Odyssée de la Plante</h2>
                 </div>
-
                 <div class="collapsible-wrapper">
                     <div class="text-lg leading-relaxed text-slate-600 space-y-4 text-justify" data-editable="intro_text">
                         <p>L'histoire du <strong>Cannabis Sativa L.</strong> est une épopée botanique et culturelle qui traverse les millénaires. Née dans les steppes d'Asie Centrale, probablement près du plateau tibétain, cette plante a été domestiquée par l'homme il y a plus de 10 000 ans, initialement pour ses fibres robustes et ses graines nutritives.</p>
@@ -200,14 +192,12 @@
                         <p>Aujourd'hui, nous vivons une véritable renaissance cannabique. La science moderne nous permet enfin de décrypter l'interaction subtile entre les cannabinoïdes (THC, CBD...) et les terpènes (les molécules aromatiques). Cette application, le Green Codex, est conçue pour vous guider dans cette nouvelle ère, vous aidant à comprendre, archiver et apprécier la complexité de chaque produit.</p>
                     </div>
                 </div>
-                
-                <!-- Arrow Toggle -->
                 <button onclick="toggleSection('intro-card')" class="absolute bottom-2 left-2 text-emerald-600 p-2 hover:bg-emerald-50 rounded-full transition">
                     <svg class="w-6 h-6 toggle-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
             </section>
 
-            <!-- 2. MY COLLECTION PREVIEW -->
+            <!-- MY COLLECTION PREVIEW -->
             <section id="my-collection-preview" class="bg-slate-900 rounded-2xl p-8 text-white relative overflow-hidden shadow-xl">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500 rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
                 <div class="relative z-10">
@@ -215,7 +205,7 @@
                         <div>
                             <h2 class="text-3xl font-bold text-white mb-2" data-editable="col_title">My Collection</h2>
                             <p class="text-slate-400" data-editable="col_sub">Votre carnet de dégustation et d'archivage personnel.</p>
-                            <p class="text-xs text-slate-500 mt-1">Source : <span id="dataSourceLabel" class="font-bold">Locale</span></p>
+                            <p class="text-xs text-slate-500 mt-1">Stockage : <span id="storageLabel" class="font-bold text-emerald-400">IndexedDB (Illimité)</span></p>
                         </div>
                         <button onclick="showView('collection')" class="bg-emerald-500 hover:bg-emerald-400 text-white px-6 py-3 rounded-xl font-bold transition shadow-lg flex items-center gap-2">
                             <span>📂</span> Ouvrir Portfolio
@@ -242,7 +232,7 @@
                 </div>
             </section>
 
-            <!-- 3. FAMILLES -->
+            <!-- FAMILIES SECTION (FULL TEXT RESTORED) -->
             <section>
                 <div class="mb-8 border-b border-slate-200 pb-4">
                     <h2 class="section-title" data-editable="fam_title">Les Familles Fondamentales</h2>
@@ -250,7 +240,6 @@
                         Le marché moderne se divise en deux grands royaumes : la fleur brute et les extractions. Chacun possède ses méthodes, ses rituels et ses profils aromatiques distincts.
                     </p>
                 </div>
-
                 <!-- Hash -->
                 <h3 class="text-xl font-bold text-slate-700 mb-4 flex items-center" data-editable="fam_sub1">🧪 Concentrés (Hash)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -263,7 +252,7 @@
                     <div onclick="showDetail('hash_water')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">❄️</div> <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded h-fit">PURETÉ</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-blue-600">Ice-O-Lator</h3>
-                        <p class="text-sm text-slate-500 text-justify mt-2">L'extraction à l'eau et glace (Solventless), utilise l'eau glacée pour extraire les trichomes. Le froid rend les glandes de résine cassantes, facilitant 
+                        <p class="text-sm text-slate-500 text-justify mt-2">Extraction à l'eau et glace (Solventless), utilise l'eau glacée pour extraire les trichomes. Le froid rend les glandes de résine cassantes, facilitant 
                             leur séparation par agitation. Le mélange est ensuite filtré à travers plusieurs sacs aux mailles de plus en plus serrées pour obtenir de l'Ice-O-Lator ou Bubble Hash.</p>
                     </div>
                     <div onclick="showDetail('hash_rosin')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500 card-interactive group">
@@ -273,7 +262,6 @@
                             on libère une résine pure, collante et ultra-concentrée, sans jamais utiliser de solvants chimiques.</p>
                     </div>
                 </div>
-
                 <!-- Weed -->
                 <h3 class="text-xl font-bold text-slate-700 mb-4 flex items-center" data-editable="fam_sub2">🌱 Fleur (Weed)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -298,21 +286,18 @@
                 </div>
             </section>
 
-            <!-- 4. POTENCY & LAYOUT RESTORED -->
+            <!-- POTENCY (FULL TEXT RESTORED) -->
             <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-lg">
                     <h2 class="section-title" data-editable="potency_title">Échelle de Puissance</h2>
                     <p class="text-slate-600 mb-4 text-sm text-justify" data-editable="potency_desc">Comparatif des taux moyens de THC observés en laboratoire.</p>
-                    <div class="chart-container">
-                        <canvas id="potencyChart"></canvas>
-                    </div>
+                    <div class="chart-container"><canvas id="potencyChart"></canvas></div>
                 </div>
                 <div class="lg:col-span-1 bg-emerald-50 border-l-4 border-emerald-500 p-6 rounded-r-xl">
                     <h4 class="font-bold text-emerald-900 text-lg mb-2" data-editable="didyouknow_title">Le Mythe du THC</h4>
                     <p class="text-sm text-emerald-800 leading-relaxed text-justify" data-editable="didyouknow_text">
                         Attention : un taux de THC élevé (80%+) ne garantit pas une expérience "meilleure". C'est l'<strong>Effet d'Entourage</strong> qui compte : la synergie complexe entre les cannabinoïdes et les terpènes.
                     </p>
-                    
                     <p class="text-sm text-emerald-800 leading-relaxed text-justify mt-4" data-editable="didyouknow_text">
                         Par exemple, le <strong>Myrcène</strong> (dominant dans la OG Kush ou un Hash Afghan) ancre la relaxation physique, tandis que le <strong>Limonène</strong> (typique de la Super Lemon Haze) booste l'énergie et l'humeur. Le <strong>Caryophyllène</strong> 
                         (Girl Scout Cookies) apporte, lui, un apaisement anti-stress. Cette synergie crée une expérience bien plus riche et nuancée que la puissance brute isolée.
@@ -320,34 +305,26 @@
                 </div>
             </section>
 
-            <!-- 5. COMPARATOR -->
+            <!-- COMPARATOR -->
             <section class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
                 <h2 class="section-title" data-editable="comp_title">Comparateur Interactif</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="space-y-6 flex flex-col justify-center bg-slate-50 p-6 rounded-xl">
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Produit A</label>
-                            <select id="selectA" class="w-full p-3 rounded border border-slate-300 bg-white outline-none" onchange="updateComparator()"></select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold text-slate-700 mb-2">Produit B</label>
-                            <select id="selectB" class="w-full p-3 rounded border border-slate-300 bg-white outline-none" onchange="updateComparator()"></select>
-                        </div>
+                        <div><label class="block text-sm font-bold text-slate-700 mb-2">Produit A</label><select id="selectA" class="w-full p-3 rounded border border-slate-300 bg-white outline-none" onchange="updateComparator()"></select></div>
+                        <div><label class="block text-sm font-bold text-slate-700 mb-2">Produit B</label><select id="selectB" class="w-full p-3 rounded border border-slate-300 bg-white outline-none" onchange="updateComparator()"></select></div>
                     </div>
-                    <div class="md:col-span-2">
-                        <div class="chart-container"><canvas id="comparatorRadar"></canvas></div>
-                    </div>
+                    <div class="md:col-span-2"><div class="chart-container"><canvas id="comparatorRadar"></canvas></div></div>
                 </div>
             </section>
 
-            <!-- 6. MATRIX -->
+            <!-- MATRIX -->
             <section class="bg-white p-6 rounded-xl shadow-md">
                 <h2 class="section-title" data-editable="matrix_title">Texture vs Pureté</h2>
                 <p class="text-slate-600 mb-4 text-justify" data-editable="matrix_desc">Analyse de la consistance (Solide/Liquide) par rapport à la concentration en trichomes.</p>
                 <div id="globalMatrixPlot" class="w-full h-[500px]"></div>
             </section>
 
-            <!-- 7. LEXICON (RESTORED) -->
+            <!-- LEXICON (FULL RESTORED) -->
             <section class="bg-slate-900 text-slate-300 p-8 rounded-xl">
                 <h2 class="section-title !text-white" data-editable="lex_title">Lexique du Connaisseur</h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 text-sm text-justify">
@@ -374,8 +351,7 @@
             </div>
         </div>
 
-
-        <!-- ==================== VIEW: DETAIL (ENCYCLOPEDIA) ==================== -->
+        <!-- ==================== VIEW: DETAIL ==================== -->
         <div id="view-detail" class="hidden fade-in space-y-8 pb-12">
             <div id="detail-header" class="bg-white p-8 rounded-2xl shadow-lg border-t-8">
                 <div class="flex justify-between items-center mb-6">
@@ -392,17 +368,12 @@
                 <div id="detail-flow" class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center"></div>
             </section>
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="chart-container"><canvas id="detailRadarChart"></canvas></div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="chart-container"><canvas id="detailBarChart"></canvas></div>
-                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md"><div class="chart-container"><canvas id="detailRadarChart"></canvas></div></div>
+                <div class="bg-white p-6 rounded-xl shadow-md"><div class="chart-container"><canvas id="detailBarChart"></canvas></div></div>
             </section>
         </div>
 
-
-        <!-- ==================== VIEW: COLLECTION (MANAGER) ==================== -->
+        <!-- ==================== VIEW: COLLECTION ==================== -->
         <div id="view-collection" class="hidden fade-in pb-20">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-3xl font-bold text-emerald-900">Mon Portfolio</h2>
@@ -410,6 +381,7 @@
                     + Ajouter
                 </button>
             </div>
+            <div id="loading-indicator" class="hidden text-center py-10 text-slate-500 font-bold">Chargement des archives...</div>
             <div id="collection-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
             <div id="empty-state" class="hidden text-center py-20 text-slate-400">
                 <div class="text-6xl mb-4">📭</div>
@@ -417,44 +389,37 @@
             </div>
         </div>
 
-        <!-- ==================== VIEW: INFO (MODIFIÉ) ==================== -->
+        <!-- ==================== VIEW: INFO (FULL TEXT) ==================== -->
         <div id="view-info" class="hidden fade-in space-y-8">
             <div class="bg-white p-6 rounded-2xl shadow-lg border-l-8 border-emerald-600">
                 <h2 class="text-2xl font-black text-slate-800 mb-6 flex items-center gap-3">
                     ℹ️ Informations & Aide
                 </h2>
-                
-                <!-- Bloc Version (Compact & Vert) -->
                 <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100 relative mb-8">
                     <div class="grid grid-cols-2 gap-4">
-                        <!-- Local -->
                         <div class="border-r border-emerald-200 pr-2">
                             <h3 class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest mb-1">Installée (Local)</h3>
                             <div class="font-mono text-xs font-bold text-slate-700 break-all" id="info-local-hash">-</div>
                             <p class="text-[10px] text-emerald-500 mt-1" id="info-local-date">Date inconnue</p>
                         </div>
-                        <!-- Remote -->
                         <div class="pl-2 text-right">
                              <div class="flex items-center justify-end gap-2 mb-1">
-                                <span class="text-[10px] font-bold text-emerald-700 uppercase">Disponible (GitHub)</span>
+                                <span class="text-[10px] font-bold text-emerald-700 uppercase">GitHub</span>
                                 <div id="connection-status" class="w-2 h-2 rounded-full bg-gray-400"></div>
                             </div>
                             <div class="font-mono text-xs font-bold text-emerald-600 break-all" id="info-remote-hash">...</div>
-                            <p class="text-[10px] text-emerald-500 mt-1">Dernier Commit</p>
                         </div>
                     </div>
                     <button onclick="forceUpdate()" class="mt-4 w-full bg-emerald-600 text-white font-bold py-2 rounded-lg hover:bg-emerald-500 transition text-sm flex justify-center items-center gap-2">
                         <span>🔄</span> Vérifier maintenant
                     </button>
                 </div>
-
-                <!-- Bloc README (Dépliant) -->
+                <!-- README -->
                 <div id="readme-card" class="bg-white border border-slate-200 p-4 rounded-xl relative shadow-sm transition-all duration-300">
                     <div class="cursor-pointer flex items-center gap-2 mb-0" onclick="toggleSection('readme-card')">
                         <span class="text-2xl">💡</span>
                         <h3 class="font-bold text-slate-800 text-lg">À propos de Green Codex</h3>
                     </div>
-                    
                     <div class="collapsible-wrapper">
                         <div class="text-sm text-slate-600 text-justify leading-relaxed mt-4 mb-4 border-t border-slate-100 pt-4">
                             <p class="mb-2"><strong>Green Codex</strong> n'est pas une simple application de notes, c'est votre compagnon d'exploration cannabique. Elle a été conçue pour combler le fossé entre la science botanique et l'expérience utilisateur.</p>
@@ -463,102 +428,61 @@
                                 <li><strong>Éduquer :</strong> En fournissant des fiches techniques précises sur les familles de plantes (Indica, Sativa) et les méthodes d'extraction (Hash), visualisables via des graphiques interactifs.</li>
                                 <li><strong>Archiver :</strong> En vous offrant un espace privé ("Mon Portfolio") pour cataloguer vos découvertes, noter vos impressions, ajouter des photos et suivre l'évolution de vos goûts au fil du temps.</li>
                             </ul>
-                            <p>Connectée en permanence à GitHub, l'application évolue sans cesse tout en garantissant que vos données personnelles restent stockées localement sur votre appareil, en toute sécurité.</p>
+                            <p>Connectée en permanence à GitHub, l'application évolue sans cesse tout en garantissant que vos données personnelles restent stockées localement sur votre appareil (via IndexedDB), en toute sécurité.</p>
                         </div>
                         <button onclick="openTutorial()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-xl shadow-md transition text-sm w-full flex justify-center items-center gap-2">
                             🎓 Lancer le Tutoriel Interactif
                         </button>
                     </div>
-
-                    <!-- Arrow Toggle -->
                     <button onclick="toggleSection('readme-card')" class="absolute bottom-2 left-2 text-slate-400 p-2 hover:bg-slate-100 rounded-full transition">
                         <svg class="w-6 h-6 toggle-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                 </div>
-
             </div>
         </div>
 
     </main>
 
-
-    <!-- MODULE DE MISE À JOUR (INJECTÉ EN BAS DE PAGE) -->
+    <!-- UPDATE MODULE -->
     <div id="updateContainer">
-        <!-- Partie Alerte -->
-        <div id="updateAlert">
-            <span class="update-text">Mise à jour 🚀</span>
-            <span class="arrow-pointer">➜</span> 
-        </div>
-        <!-- Le Bouton -->
-        <button id="refreshBtn" onclick="forceUpdate()">
-            <div class="update-dot" id="updateDot"></div>
-            &#x21bb;
-        </button>
+        <div id="updateAlert"><span class="update-text">Mise à jour 🚀</span><span class="arrow-pointer">➜</span></div>
+        <button id="refreshBtn" onclick="forceUpdate()"><div class="update-dot" id="updateDot"></div>&#x21bb;</button>
     </div>
 
-    <!-- MODULE WHAT'S NEW (POPUP) -->
+    <!-- WHATS NEW MODULE -->
     <div id="wn-overlay">
         <div id="wn-modal">
-            <div class="wn-header">
-                <span id="wn-badge-text" class="wn-badge">Mise à jour détectée</span>
-                <h2 id="wn-main-title" class="wn-title">Quoi de neuf ?</h2>
-            </div>
+            <div class="wn-header"><span id="wn-badge-text" class="wn-badge">Mise à jour détectée</span><h2 id="wn-main-title" class="wn-title">Quoi de neuf ?</h2></div>
             <div id="wn-content" class="wn-slides-container"><div class="wn-loader"></div></div>
             <div id="wn-dots" class="wn-dots"></div>
             <button id="wn-btn" onclick="nextSlide()" style="display:none">Suivant ➜</button>
         </div>
     </div>
 
-
     <!-- MODAL: COLLECTION FORM -->
     <div id="collection-modal" class="hidden fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto">
             <h3 id="modal-title" class="text-2xl font-bold text-slate-800 mb-6">Ajouter à la collection</h3>
             <form id="collection-form" onsubmit="handleCollectionSubmit(event)" class="space-y-4">
-                <input type="hidden" name="editIndex" id="editIndex" value="-1">
+                <input type="hidden" name="editId" id="editId" value="">
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="space-y-1">
-                        <label class="text-xs font-bold text-slate-500 uppercase">Catégorie</label>
-                        <select name="category" id="inp-category" class="input-field" onchange="toggleFormFields(this.value)">
-                            <option value="weed">🥦 Weed</option>
-                            <option value="hash">🍫 Hash</option>
-                        </select>
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-xs font-bold text-slate-500 uppercase">Quantité (g)</label>
-                        <input type="number" step="0.1" name="quantity" id="inp-quantity" class="input-field" placeholder="ex: 3.5">
-                    </div>
+                    <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Catégorie</label><select name="category" id="inp-category" class="input-field" onchange="toggleFormFields(this.value)"><option value="weed">🥦 Weed</option><option value="hash">🍫 Hash</option></select></div>
+                    <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Quantité (g)</label><input type="number" step="0.1" name="quantity" id="inp-quantity" class="input-field" placeholder="ex: 3.5"></div>
                 </div>
-                <div id="hash-fields" class="hidden bg-amber-50 p-3 rounded-lg border border-amber-100 mb-2">
-                    <label class="text-xs font-bold text-amber-600 uppercase mb-1">Type de Hash</label>
-                    <input type="text" name="hashType" id="inp-hashType" class="input-field border-amber-200" placeholder="ex: Dry Sift...">
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Variété (Strain)</label>
-                    <input type="text" name="strain" id="inp-strain" class="input-field font-bold" placeholder="ex: Gelato #41" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Nom Commercial</label>
-                    <input type="text" name="commercialName" id="inp-commercialName" class="input-field" placeholder="ex: Blue Magic">
-                </div>
+                <div id="hash-fields" class="hidden bg-amber-50 p-3 rounded-lg border border-amber-100 mb-2"><label class="text-xs font-bold text-amber-600 uppercase mb-1">Type de Hash</label><input type="text" name="hashType" id="inp-hashType" class="input-field border-amber-200" placeholder="ex: Dry Sift..."></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Variété (Strain)</label><input type="text" name="strain" id="inp-strain" class="input-field font-bold" placeholder="ex: Gelato #41" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Nom Commercial</label><input type="text" name="commercialName" id="inp-commercialName" class="input-field" placeholder="ex: Blue Magic"></div>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="space-y-1">
-                        <label class="text-xs font-bold text-slate-500 uppercase">Pays</label>
-                        <input type="text" name="country" id="inp-country" class="input-field" placeholder="ex: Pays-Bas">
-                    </div>
-                    <div class="space-y-1">
-                        <label class="text-xs font-bold text-slate-500 uppercase">Prix (€)</label>
-                        <input type="number" name="price" id="inp-price" class="input-field" placeholder="ex: 50">
-                    </div>
+                    <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Pays</label><input type="text" name="country" id="inp-country" class="input-field" placeholder="ex: Pays-Bas"></div>
+                    <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Prix (€)</label><input type="number" name="price" id="inp-price" class="input-field" placeholder="ex: 50"></div>
                 </div>
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Photos (Max 3)</label>
+                    <label class="text-xs font-bold text-slate-500 uppercase">Photos (HD Illimité)</label>
                     <div class="flex gap-2 items-center">
                         <label class="w-20 h-20 border-2 border-dashed border-slate-300 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:bg-slate-50 transition text-slate-400">
-                            <span class="text-2xl">+</span>
-                            <input type="file" id="photo-input" class="hidden" accept="image/*" multiple onchange="handlePhotos(this)">
+                            <span class="text-2xl">+</span><input type="file" id="photo-input" class="hidden" accept="image/*" multiple onchange="handlePhotos(this)">
                         </label>
-                        <div id="photo-preview-list" class="flex gap-2"></div>
+                        <div id="photo-preview-list" class="flex gap-2 overflow-x-auto"></div>
                     </div>
                 </div>
                 <div class="flex gap-3 pt-4">
@@ -572,22 +496,12 @@
     <!-- MODAL: SECTION ADD -->
     <div id="section-modal" class="hidden fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6">
-            <h3 class="text-2xl font-bold text-slate-800 mb-6" id="section-modal-title">Ajouter une Section</h3>
+            <h3 class="text-2xl font-bold text-slate-800 mb-6">Ajouter une Section</h3>
             <form id="section-form" onsubmit="handleSectionSubmit(event)" class="space-y-4">
                 <input type="hidden" name="secId" id="sec-id">
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Titre</label>
-                    <input type="text" name="secTitle" id="sec-title" class="input-field font-bold" required>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Contenu</label>
-                    <textarea name="secText" id="sec-text" class="input-field" required></textarea>
-                </div>
-                <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-500 uppercase">Image (Optionnel)</label>
-                    <input type="file" id="sec-photo-input" class="input-field" accept="image/*">
-                    <div id="sec-current-image" class="mt-2 hidden"><img src="" class="h-20 rounded border"></div>
-                </div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Titre</label><input type="text" name="secTitle" id="sec-title" class="input-field font-bold" required></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Contenu</label><textarea name="secText" id="sec-text" class="input-field" required></textarea></div>
+                <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Image</label><input type="file" id="sec-photo-input" class="input-field" accept="image/*"><div id="sec-current-image" class="mt-2 hidden"><img src="" class="h-20 rounded border"></div></div>
                 <div class="flex gap-3 pt-4">
                     <button type="button" onclick="closeSectionModal()" class="flex-1 py-3 rounded-xl border border-slate-300 text-slate-500 font-bold">Annuler</button>
                     <button type="submit" class="flex-1 py-3 rounded-xl bg-amber-500 text-white font-bold hover:bg-amber-600">Enregistrer</button>
@@ -599,58 +513,22 @@
     <!-- MODAL: COLLECTION DETAIL -->
     <div id="collection-detail-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300">
         <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col animate-fade-in">
-            <!-- Header Image Area -->
             <div id="cd-img-container" class="w-full h-64 bg-slate-900 relative flex-shrink-0 group">
                 <img id="cd-main-img" class="w-full h-full object-contain">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
                 <button onclick="closeCollectionDetail()" class="absolute top-4 right-4 bg-white/20 text-white rounded-full p-2 hover:bg-white/40 backdrop-blur-sm transition">✕</button>
                 <div id="cd-thumbs" class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 px-4 overflow-x-auto z-10"></div>
             </div>
-            
-            <!-- Content -->
             <div class="p-6 overflow-y-auto">
                 <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <h2 id="cd-strain" class="text-3xl font-black text-slate-800 leading-tight">Strain</h2>
-                        <p id="cd-commercial" class="text-emerald-600 font-bold uppercase text-sm tracking-wider mt-1">Commercial</p>
-                    </div>
+                    <div><h2 id="cd-strain" class="text-3xl font-black text-slate-800 leading-tight">Strain</h2><p id="cd-commercial" class="text-emerald-600 font-bold uppercase text-sm tracking-wider mt-1">Commercial</p></div>
                     <div class="text-5xl" id="cd-flag">🏳️</div>
                 </div>
-
                 <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
-                        <span class="text-[10px] uppercase text-slate-400 font-bold block">Quantité</span>
-                        <span id="cd-quantity" class="text-xl font-black text-slate-700">0g</span>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
-                        <span class="text-[10px] uppercase text-slate-400 font-bold block">Prix</span>
-                        <span id="cd-price" class="text-xl font-black text-slate-700">0€</span>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
-                        <span class="text-[10px] uppercase text-slate-400 font-bold block">Type</span>
-                        <span id="cd-category" class="text-lg font-bold text-slate-700">Weed</span>
-                    </div>
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
-                        <span class="text-[10px] uppercase text-slate-400 font-bold block">Date</span>
-                        <span id="cd-date" class="text-sm font-bold text-slate-700">...</span>
-                    </div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center"><span class="text-[10px] uppercase text-slate-400 font-bold block">Quantité</span><span id="cd-quantity" class="text-xl font-black text-slate-700">0g</span></div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center"><span class="text-[10px] uppercase text-slate-400 font-bold block">Prix</span><span id="cd-price" class="text-xl font-black text-slate-700">0€</span></div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center"><span class="text-[10px] uppercase text-slate-400 font-bold block">Type</span><span id="cd-category" class="text-lg font-bold text-slate-700">Weed</span></div>
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center"><span class="text-[10px] uppercase text-slate-400 font-bold block">Date</span><span id="cd-date" class="text-sm font-bold text-slate-700">...</span></div>
                 </div>
-
-                <div class="space-y-3 text-sm text-slate-600 mb-8 bg-white rounded-xl">
-                    <div class="flex justify-between border-b border-slate-100 pb-2">
-                        <span>Producteur</span>
-                        <span id="cd-farm" class="font-bold text-slate-800">Unknown</span>
-                    </div>
-                    <div class="flex justify-between border-b border-slate-100 pb-2 hidden" id="cd-hash-row">
-                        <span>Technique Hash</span>
-                        <span id="cd-hash-type" class="font-bold text-amber-600">-</span>
-                    </div>
-                    <div class="flex justify-between border-b border-slate-100 pb-2">
-                        <span>Origine</span>
-                        <span id="cd-country" class="font-bold text-slate-800">-</span>
-                    </div>
-                </div>
-
                 <div class="flex gap-3">
                     <button id="cd-btn-edit" class="flex-1 py-3 rounded-xl border border-blue-200 text-blue-600 font-bold hover:bg-blue-50 transition">Modifier</button>
                     <button id="cd-btn-delete" class="flex-1 py-3 rounded-xl border border-red-200 text-red-500 font-bold hover:bg-red-50 transition">Supprimer</button>
@@ -662,38 +540,99 @@
 
     <script>
         // ============================================================
+        // 💾 INDEXEDDB MANAGER (DATABASE)
+        // ============================================================
+        const DB_NAME = 'GreenCodexDB';
+        const DB_VERSION = 1;
+
+        const db = {
+            instance: null,
+            
+            init: function() {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open(DB_NAME, DB_VERSION);
+                    
+                    request.onupgradeneeded = (e) => {
+                        const d = e.target.result;
+                        // Store pour la collection (Images, infos)
+                        if(!d.objectStoreNames.contains('collection')) {
+                            d.createObjectStore('collection', { keyPath: 'id', autoIncrement: true });
+                        }
+                        // Store pour la configuration (Textes édités, Sections custom)
+                        if(!d.objectStoreNames.contains('config')) {
+                            d.createObjectStore('config', { keyPath: 'key' });
+                        }
+                    };
+
+                    request.onsuccess = (e) => {
+                        this.instance = e.target.result;
+                        resolve(this.instance);
+                    };
+                    request.onerror = (e) => reject("DB Error");
+                });
+            },
+
+            // Generic Get
+            getAll: function(storeName) {
+                return new Promise((resolve) => {
+                    const tx = this.instance.transaction(storeName, 'readonly');
+                    const store = tx.objectStore(storeName);
+                    const req = store.getAll();
+                    req.onsuccess = () => resolve(req.result);
+                    req.onerror = () => resolve([]);
+                });
+            },
+
+            // Generic Save Item
+            save: function(storeName, item) {
+                return new Promise((resolve, reject) => {
+                    const tx = this.instance.transaction(storeName, 'readwrite');
+                    const store = tx.objectStore(storeName);
+                    const req = store.put(item);
+                    req.onsuccess = () => resolve(req.result); // Returns ID
+                    req.onerror = () => reject(req.error);
+                });
+            },
+
+            // Generic Delete
+            delete: function(storeName, key) {
+                return new Promise((resolve) => {
+                    const tx = this.instance.transaction(storeName, 'readwrite');
+                    const store = tx.objectStore(storeName);
+                    store.delete(key);
+                    tx.oncomplete = () => resolve();
+                });
+            }
+        };
+
+
+        // ============================================================
         // ⚠️ CONFIGURATION GITHUB ⚠️
         // ============================================================
-        
         const GITHUB_USERNAME = 'antoto2021'; 
-        // ⚠️ REMPLACEZ 'Green-Codex' PAR LE NOM EXACT DE VOTRE REPO SI DIFFÉRENT
         const GITHUB_REPO     = 'Appli-Portfolio';        
-        
-        // Délai avant vérification (6 secondes pour le test, peut être augmenté)
-        const CHECK_DELAY     = 0.1 * 60 * 1000; 
-        
-        // Clé de stockage pour le hash de version
-        const UPDATE_STORAGE_KEY = 'green_codex_last_hash';
-        // Clé de stockage pour la date de la dernière mise à jour
-        const UPDATE_TIME_KEY    = 'green_codex_update_timestamp';
+        const UPDATE_STORAGE_KEY = 'green_codex_last_hash'; // Reste en localStorage
+        const UPDATE_TIME_KEY    = 'green_codex_update_timestamp'; // Reste en localStorage
 
-        // ============================================================
-
-        // --- DATA ---
-        const masterData = { hash_dry: { name: "Dry Sift", color: "amber", hex: "#D97706", badge: "Tradition", icon: "🏜️", desc: "Tamisage mécanique ancestral.", process: [{t:"Séchage",d:"Plante affinée"},{t:"Tamisage",d:"Frottement"},{t:"Collection",d:"Poudre"},{t:"Presse",d:"Chaleur"}], radar: [30,90,70,50,60], metrics: [20,50,40,30], metricsLabels: ['Rendement','Puissance','Prix','Tech'], matrix: {x:45,y:9} }, hash_water: { name: "Ice-O-Lator", color: "blue", hex: "#2563EB", badge: "Pureté", icon: "❄️", desc: "Extraction eau glacée + Fresh Frozen.", process: [{t:"Congélation",d:"-40°C"},{t:"Lavage",d:"Eau+Glace"},{t:"Filtre",d:"Sacs"},{t:"Séchage",d:"Lyophilisation"}], radar: [90,30,60,95,85], metrics: [10,75,90,80], metricsLabels: ['Rendement','Puissance','Prix','Tech'], matrix: {x:70,y:6} }, hash_rosin: { name: "Rosin", color: "purple", hex: "#9333EA", badge: "Excellence", icon: "🔥", desc: "Pression et chaleur uniquement.", process: [{t:"Matériel",d:"Hash 6*"},{t:"Sac",d:"25u Nylon"},{t:"Presse",d:"Hydraulique"},{t:"Cure",d:"Cold Cure"}], radar: [85,50,80,90,95], metrics: [15,85,100,60], metricsLabels: ['Rendement','Puissance','Prix','Tech'], matrix: {x:85,y:3} }, weed_indica: { name: "Indica (Kush)", color: "indigo", hex: "#4F46E5", badge: "Relax", icon: "🏔️", desc: "Montagnes, effet lourd.", process: [{t:"Origine",d:"Hindu Kush"},{t:"Structure",d:"Buisson"},{t:"Flo",d:"8 sem"},{t:"Effet",d:"Physique"}], radar: [20,80,90,60,40], metrics: [80,22,50,90], metricsLabels: ['Rendement','THC','Taille','Facilité'], matrix: {x:20,y:10} }, weed_sativa: { name: "Sativa (Haze)", color: "yellow", hex: "#D97706", badge: "Energie", icon: "☀️", desc: "Tropiques, effet high.", process: [{t:"Origine",d:"Equateur"},{t:"Structure",d:"Géante"},{t:"Flo",d:"12+ sem"},{t:"Effet",d:"Cérébral"}], radar: [60,40,20,70,40], metrics: [90,18,100,60], metricsLabels: ['Rendement','THC','Taille','Facilité'], matrix: {x:18,y:10} }, weed_exotic: { name: "Exotics", color: "pink", hex: "#DB2777", badge: "Hybride", icon: "🧬", desc: "Breeding US moderne.", process: [{t:"Origine",d:"Indoor"},{t:"Structure",d:"Optimisée"},{t:"Flo",d:"9 sem"},{t:"Effet",d:"Mixte"}], radar: [80,50,60,80,50], metrics: [75,28,60,70], metricsLabels: ['Rendement','THC','Taille','Facilité'], matrix: {x:28,y:10} } };
-
-        let collection = JSON.parse(localStorage.getItem('green_codex_collection_v4') || '[]');
-        let contentMap = JSON.parse(localStorage.getItem('green_codex_content_v4') || '{}');
-        let customSections = JSON.parse(localStorage.getItem('green_codex_custom_sections_v4') || '[]');
+        // --- GLOBAL VARIABLES (Runtime) ---
+        let collection = [];
+        let contentMap = {};
+        let customSections = [];
         let isEditMode = false;
         let currentPhotos = [];
         let currentSectionImage = null;
-
-        // --- VARIABLES UPDATE ---
         let activeUpdates = [{ icon: "🚀", title: "Mise à jour", desc: "Nouvelle version disponible." }];
         let currentSlide = 0;
-        let timerInterval = null;
 
+        const masterData = { hash_dry: { name: "Dry Sift", color: "amber", hex: "#D97706", badge: "Tradition", icon: "🏜️", desc: "Tamisage mécanique ancestral.", process: [{t:"Séchage",d:"Plante affinée"},{t:"Tamisage",d:"Frottement"},{t:"Collection",d:"Poudre"},{t:"Presse",d:"Chaleur"}], radar: [30,90,70,50,60], metrics: [20,50,40,30], metricsLabels: ['Rendement','Puissance','Prix','Tech'], matrix: {x:45,y:9} }, hash_water: { name: "Ice-O-Lator", color: "blue", hex: "#2563EB", badge: "Pureté", icon: "❄️", desc: "Extraction eau glacée + Fresh Frozen.", process: [{t:"Congélation",d:"-40°C"},{t:"Lavage",d:"Eau+Glace"},{t:"Filtre",d:"Sacs"},{t:"Séchage",d:"Lyophilisation"}], radar: [90,30,60,95,85], metrics: [10,75,90,80], metricsLabels: ['Rendement','Puissance','Prix','Tech'], matrix: {x:70,y:6} }, hash_rosin: { name: "Rosin", color: "purple", hex: "#9333EA", badge: "Excellence", icon: "🔥", desc: "Pression et chaleur uniquement.", process: [{t:"Matériel",d:"Hash 6*"},{t:"Sac",d:"25u Nylon"},{t:"Presse",d:"Hydraulique"},{t:"Cure",d:"Cold Cure"}], radar: [85,50,80,90,95], metrics: [15,85,100,60], metricsLabels: ['Rendement','Puissance','Prix','Tech'], matrix: {x:85,y:3} }, weed_indica: { name: "Indica (Kush)", color: "indigo", hex: "#4F46E5", badge: "Relax", icon: "🏔️", desc: "Montagnes, effet lourd.", process: [{t:"Origine",d:"Hindu Kush"},{t:"Structure",d:"Buisson"},{t:"Flo",d:"8 sem"},{t:"Effet",d:"Physique"}], radar: [20,80,90,60,40], metrics: [80,22,50,90], metricsLabels: ['Rendement','THC','Taille','Facilité'], matrix: {x:20,y:10} }, weed_sativa: { name: "Sativa (Haze)", color: "yellow", hex: "#D97706", badge: "Energie", icon: "☀️", desc: "Tropiques, effet high.", process: [{t:"Origine",d:"Equateur"},{t:"Structure",d:"Géante"},{t:"Flo",d:"12+ sem"},{t:"Effet",d:"Cérébral"}], radar: [60,40,20,70,40], metrics: [90,18,100,60], metricsLabels: ['Rendement','THC','Taille','Facilité'], matrix: {x:18,y:10} }, weed_exotic: { name: "Exotics", color: "pink", hex: "#DB2777", badge: "Hybride", icon: "🧬", desc: "Breeding US moderne.", process: [{t:"Origine",d:"Indoor"},{t:"Structure",d:"Optimisée"},{t:"Flo",d:"9 sem"},{t:"Effet",d:"Mixte"}], radar: [80,50,60,80,50], metrics: [75,28,60,70], metricsLabels: ['Rendement','THC','Taille','Facilité'], matrix: {x:28,y:10} } };
+
+        const tutorialSlides = [
+            { icon: "👋", title: "Bienvenue !", desc: "Découvrez Green Codex, votre encyclopédie cannabique interactive et personnelle." },
+            { icon: "📖", title: "Encyclopédie", desc: "Explorez les fiches techniques : Indica, Sativa, Dry Sift... Tout le savoir à portée de main." },
+            { icon: "📊", title: "Radars", desc: "Visualisez instantanément le profil aromatique et les effets grâce aux graphiques radars." },
+            { icon: "📂", title: "Collection", desc: "Ajoutez vos découvertes. Grâce à IndexedDB, le stockage est illimité et sécurisé." },
+            { icon: "✏️", title: "Mode Édition", desc: "Activez le mode édition pour réécrire les textes. Vos modifications sont sauvegardées." }
+        ];
 
         // --- CORE FUNCTIONS ---
         function showView(viewId) {
@@ -701,334 +640,72 @@
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
             document.getElementById('navBackBtn').classList.toggle('hidden', viewId === 'home');
             document.getElementById('editModeBtn').classList.toggle('hidden', viewId !== 'home');
-            
-            // Masquer ou afficher le bouton info selon la vue
             const infoBtn = document.querySelector('button[onclick="showView(\'info\')"]');
             if(infoBtn) infoBtn.style.display = (viewId === 'home' || viewId === 'info') ? 'flex' : 'none';
-
             window.scrollTo(0,0);
             if(viewId === 'collection') renderCollectionList();
             if(viewId === 'info') renderInfoView();
         }
 
-        // ============================================================
-        // ⚠️ CONFIGURATION TUTORIEL (10 SLIDES) ⚠️
-        // ============================================================
-        const tutorialSlides = [
-            { icon: "👋", title: "Bienvenue !", desc: "Découvrez Green Codex, votre encyclopédie cannabique interactive et personnelle." },
-            { icon: "📖", title: "Encyclopédie", desc: "Explorez les fiches techniques : Indica, Sativa, Dry Sift, Rosin... Tout le savoir à portée de main." },
-            { icon: "📊", title: "Radars", desc: "Visualisez instantanément le profil aromatique et les effets grâce aux graphiques radars dynamiques." },
-            { icon: "⚖️", title: "Comparateur", desc: "Hésitation entre deux variétés ? Superposez leurs graphiques pour voir leurs différences." },
-            { icon: "📂", title: "Collection", desc: "Créez votre 'Pokedex' personnel ! Ajoutez chaque variété que vous goûtez." },
-            { icon: "📝", title: "Détails", desc: "Indiquer la farm, la strain, la quantité et le pays d'origine pour chaque entrée." },
-            { icon: "📸", title: "Photos", desc: "Immortalisez vos plus belles fleurs. Ajoutez jusqu'à 3 photos par fiche." },
-            { icon: "✏️", title: "Mode Édition", desc: "C'est VOTRE appli. Activez le mode édition (en haut) pour réécrire les textes et titres." },
-            { icon: "🔄", title: "Mises à jour", desc: "Connectée à GitHub, l'appli évolue automatiquement. Vos données restent sécurisées sur votre téléphone." },
-            { icon: "🚀", title: "C'est parti !", desc: "Vous êtes prêt. Commencez à explorer et à construire votre collection dès maintenant." }
-        ];
-
-        // ============================================================
-        // SYSTÈME DE MISE À JOUR (GITHUB API)
-        // ============================================================
-
-        function startUpdateCheckTimer() {
-            // Vérification unique après 5 secondes à l'ouverture
-            setTimeout(() => {
-                checkGitHubStatus();
-            }, 5000);
-        }
-
-        async function checkGitHubStatus() {
-            console.log("🔍 Vérification GitHub...");
-            // 1. Récupérer le hash Distant (GitHub)
-            const remoteCommit = await fetchLatestCommit();
-            if (!remoteCommit) return;
-
-            const remoteHash = remoteCommit.sha;
-            const storedHash = localStorage.getItem(UPDATE_STORAGE_KEY);
-
-            console.log(`Local: ${storedHash ? storedHash.substring(0,7) : 'Aucun'} | Remote: ${remoteHash.substring(0,7)}`);
-
-            // 2. Logique de comparaison
-            if (!storedHash) {
-                // Cas A : Premier lancement -> on stocke juste l'état actuel et la date
-                console.log("Premier lancement ou reset. Sauvegarde du hash.");
-                localStorage.setItem(UPDATE_STORAGE_KEY, remoteHash);
-                localStorage.setItem(UPDATE_TIME_KEY, Date.now());
-            } else if (storedHash !== remoteHash) {
-                // Cas B : Différence détectée -> Mise à jour dispo !
-                console.log("⚠️ Mise à jour disponible !");
-                triggerUpdateUI();
-                
-                // Pré-chargement des notes de version
-                const parsed = parseCommitMessage(remoteCommit.commit.message);
-                if(parsed.length > 0) activeUpdates = parsed;
-            } else {
-                console.log("✅ Application à jour.");
-            }
-        }
-
-        async function handlePostUpdate() {
-            console.log("Post-Update détecté via URL.");
-
-            // 1. Récupérer le commit distant AVANT d'ouvrir le popup
-            const commit = await fetchLatestCommit();
-            
-            if (!commit) return; 
-
-            const remoteHash = commit.sha;
-            const storedHash = localStorage.getItem(UPDATE_STORAGE_KEY);
-
-            // 2. Si le hash local est DÉJÀ égal au hash distant, c'est que la maj a déjà été traitée
-            // On n'affiche pas le popup et on nettoie l'URL
-            if (storedHash === remoteHash) {
-                console.log("Hash identique (Maj déjà effectuée). Suppression du paramètre URL.");
-                const url = new URL(window.location.href);
-                url.searchParams.delete('v');
-                window.history.replaceState({}, document.title, url.toString());
-                return; 
-            }
-
-            // 3. Sinon, on affiche le popup
-            const overlay = document.getElementById('wn-overlay');
-            overlay.style.display = 'flex';
-            setTimeout(() => overlay.classList.add('show-modal'), 10);
-
-            // 4. Sauvegarder le NOUVEAU hash comme référence ET la date
-            localStorage.setItem(UPDATE_STORAGE_KEY, remoteHash);
-            localStorage.setItem(UPDATE_TIME_KEY, Date.now());
-            console.log("Nouveau hash sauvegardé après maj : " + remoteHash);
-
-            // 5. Remplir le popup
-            const parsed = parseCommitMessage(commit.commit.message);
-            if (parsed.length > 0) activeUpdates = parsed;
-
-            renderSlides();
-            updateSlideUI();
-            document.getElementById('wn-btn').style.display = 'flex';
-        }
-
-        // --- INFO & TOGGLE LOGIC ---
-
-        function toggleSection(id) {
-            const el = document.getElementById(id);
-            if(el) {
-                el.classList.toggle('expanded');
-            }
-        }
-
-        function openTutorial() {
-            // Remplacer temporairement les slides par le tuto
-            activeUpdates = tutorialSlides;
-            currentSlide = 0;
-            
-            // Changer le titre du modal pour le tuto
-            const badge = document.getElementById('wn-badge-text');
-            badge.innerText = "Tutoriel";
-            badge.style.backgroundColor = "#F59E0B"; // Amber
-            badge.style.color = "#fff"; 
-            
-            document.getElementById('wn-main-title').innerText = "Guide Rapide";
-
-            // Ouvrir le modal
-            const overlay = document.getElementById('wn-overlay');
-            overlay.style.display = 'flex';
-            setTimeout(() => overlay.classList.add('show-modal'), 5);
-            
-            renderSlides();
-            updateSlideUI();
-            document.getElementById('wn-btn').style.display = 'flex';
-        }
-
-        async function renderInfoView() {
-            // 1. Hash Local
-            const localHash = localStorage.getItem(UPDATE_STORAGE_KEY) || 'Aucun';
-            document.getElementById('info-local-hash').innerText = localHash.substring(0, 7) + (localHash.length > 7 ? '...' : '');
-            
-            // 2. Date Locale
-            const localTs = localStorage.getItem(UPDATE_TIME_KEY);
-            if(localTs) {
-                const diff = Date.now() - parseInt(localTs);
-                const minutes = Math.floor(diff / 60000);
-                const hours = Math.floor(minutes / 60);
-                const days = Math.floor(hours / 24);
-
-                let timeString = "Il y a quelques instants";
-                if(days > 0) timeString = `Il y a ${days} jour(s)`;
-                else if(hours > 0) timeString = `Il y a ${hours} heure(s)`;
-                else if(minutes > 0) timeString = `Il y a ${minutes} minute(s)`;
-                
-                document.getElementById('info-local-date').innerText = timeString;
-            } else {
-                document.getElementById('info-local-date').innerText = "Date d'installation inconnue";
-            }
-
-            // 3. Remote Hash & Status Indicator
-            const statusDot = document.getElementById('connection-status');
-            const remoteEl = document.getElementById('info-remote-hash');
-            
-            remoteEl.innerText = "Check...";
-            // Reset status classes
-            statusDot.className = "w-2 h-2 rounded-full bg-gray-400"; // Gris par défaut
-
-            const remoteCommit = await fetchLatestCommit();
-            if(remoteCommit) {
-                remoteEl.innerText = remoteCommit.sha.substring(0, 7) + '...';
-                statusDot.classList.remove('bg-gray-400');
-                statusDot.classList.add('bg-green-500'); // Vert = OK
-            } else {
-                remoteEl.innerText = "Hors ligne";
-                statusDot.classList.remove('bg-gray-400');
-                statusDot.classList.add('bg-red-500'); // Rouge = Erreur
-            }
-        }
-
-        // --- OUTILS API GITHUB ---
-
-        async function fetchLatestCommit() {
-            if(GITHUB_USERNAME === 'VOTRE_NOM_UTILISATEUR') {
-                console.warn("GitHub non configuré dans le script."); return null;
-            }
+        // --- INITIALISATION & MIGRATION ---
+        async function initApp() {
             try {
-                // Ajout d'un timestamp pour éviter le cache du navigateur
-                const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1&t=${Date.now()}`);
-                if (!response.ok) throw new Error("Erreur API GitHub");
-                const data = await response.json();
-                return data[0];
-            } catch (error) {
-                console.error("Erreur check GitHub:", error);
-                return null;
-            }
-        }
+                // 1. Ouvrir IndexedDB
+                await db.init();
+                console.log("DB Connected");
 
-        // --- UI UTILS (UPDATE) ---
-
-        function triggerUpdateUI() {
-            const dot = document.getElementById('updateDot');
-            const alertBox = document.getElementById('updateAlert');
-            const arrow = document.querySelector('.arrow-pointer');
-            
-            // Affiche seulement si pas déjà affiché
-            if(dot.style.display !== 'block') {
-                dot.style.display = 'block';
-                alertBox.style.display = 'flex';
-                arrow.classList.remove('bouncing');
-                void arrow.offsetWidth; 
-                arrow.classList.add('bouncing');
-            }
-        }
-
-        function forceUpdate() {
-            const btn = document.getElementById('refreshBtn');
-            btn.classList.add('rotating');
-            setTimeout(() => {
-                const baseUrl = window.location.href.split('?')[0];
-                // On recharge avec un paramètre v=timestamp pour forcer le navigateur à recharger
-                // ET déclencher le handlePostUpdate au prochain chargement
-                window.location.href = baseUrl + '?v=' + Date.now();
-            }, 500);
-        }
-
-        // --- POPUP SLIDES LOGIC (WHAT'S NEW) ---
-
-        function parseCommitMessage(msg) {
-            const lines = msg.split('\n');
-            const foundUpdates = [];
-            lines.forEach(line => {
-                const cleanLine = line.trim();
-                // Cherche les lignes commençant par *, +, ou -
-                if (cleanLine.match(/^[*+-]\s/)) {
-                    let content = cleanLine.substring(2).trim();
-                    // Format attendu: "* Titre: Description"
-                    const parts = content.split(':');
-                    if (parts.length >= 2) {
-                        const titlePart = parts[0].trim();
-                        const descPart = parts.slice(1).join(':').trim();
-                        
-                        // Extraction Emoji simple
-                        let icon = "✨";
-                        let title = titlePart;
-                        const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu;
-                        const match = titlePart.match(emojiRegex);
-                        if (match && titlePart.indexOf(match[0]) === 0) {
-                            icon = match[0];
-                            title = titlePart.replace(match[0], '').trim();
+                // 2. MIGRATION LOCALSTORAGE -> INDEXEDDB (Si nécessaire)
+                const legacyCol = localStorage.getItem('green_codex_collection_v4');
+                if(legacyCol) {
+                    const parsed = JSON.parse(legacyCol);
+                    if(parsed.length > 0) {
+                        console.log("Migration des anciennes données...");
+                        for(let item of parsed) {
+                            delete item.id; // Laissez l'autoIncrement gérer
+                            await db.save('collection', item);
                         }
-                        foundUpdates.push({ icon, title, desc: descPart });
                     }
+                    localStorage.removeItem('green_codex_collection_v4'); // Nettoyage
                 }
-            });
-            return foundUpdates;
-        }
 
-        function renderSlides() {
-            const container = document.getElementById('wn-content');
-            const dotsContainer = document.getElementById('wn-dots');
-            if(activeUpdates.length === 0) {
-                container.innerHTML = `<div class="wn-slide" style="display:block"><span class="wn-icon">🚀</span><span class="wn-slide-title">Mise à jour effectuée</span><p class="wn-desc">L'application est à jour.</p></div>`;
-                return;
-            }
-            container.innerHTML = activeUpdates.map((slide, index) => `
-                <div class="wn-slide" id="slide-${index}"><span class="wn-icon">${slide.icon}</span><span class="wn-slide-title">${slide.title}</span><p class="wn-desc">${slide.desc}</p></div>
-            `).join('');
-            dotsContainer.innerHTML = activeUpdates.map((_, index) => `<div class="wn-dot" id="dot-${index}"></div>`).join('');
-        }
-
-        function updateSlideUI() {
-            document.querySelectorAll('.wn-slide').forEach((el, index) => {
-                el.style.display = index === currentSlide ? 'block' : 'none';
-            });
-            document.querySelectorAll('.wn-dot').forEach((el, index) => {
-                if(index === currentSlide) el.classList.add('active');
-                else el.classList.remove('active');
-            });
-
-            const btn = document.getElementById('wn-btn');
-            if (currentSlide === activeUpdates.length - 1) {
-                btn.innerHTML = "C'est noté ✅";
-                btn.style.backgroundColor = "#166534";
-            } else {
-                btn.innerHTML = "Suivant ➜";
-                btn.style.backgroundColor = "#15803d";
-            }
-        }
-
-        function nextSlide() {
-            if (currentSlide < activeUpdates.length - 1) {
-                currentSlide++;
-                updateSlideUI();
-            } else {
-                closePopup();
-            }
-        }
-
-        function closePopup() {
-            const overlay = document.getElementById('wn-overlay');
-            overlay.classList.remove('show-modal');
-            
-            // Reset modal styles (in case tutorial changed them)
-            setTimeout(() => {
-                overlay.style.display = 'none';
+                const legacyContent = localStorage.getItem('green_codex_content_v4');
+                if(legacyContent) {
+                    await db.save('config', { key: 'contentMap', value: JSON.parse(legacyContent) });
+                    localStorage.removeItem('green_codex_content_v4');
+                }
                 
-                // Revert Title styles
-                const badge = document.getElementById('wn-badge-text');
-                badge.innerText = "Mise à jour détectée";
-                badge.style.backgroundColor = "#dcfce7";
-                badge.style.color = "#166534";
-                document.getElementById('wn-main-title').innerText = "Quoi de neuf ?";
-
-                // Nettoyer l'URL si nécessaire
-                const url = new URL(window.location.href);
-                if(url.searchParams.has('v')) {
-                    url.searchParams.delete('v');
-                    window.history.replaceState({}, document.title, url.toString());
+                const legacySections = localStorage.getItem('green_codex_custom_sections_v4');
+                if(legacySections) {
+                    await db.save('config', { key: 'customSections', value: JSON.parse(legacySections) });
+                    localStorage.removeItem('green_codex_custom_sections_v4');
                 }
-            }, 300);
+
+                // 3. CHARGER LES DONNÉES DEPUIS DB
+                collection = await db.getAll('collection');
+                
+                const contentConfig = (await db.getAll('config')).find(c => c.key === 'contentMap');
+                contentMap = contentConfig ? contentConfig.value : {};
+                
+                const sectionsConfig = (await db.getAll('config')).find(c => c.key === 'customSections');
+                customSections = sectionsConfig ? sectionsConfig.value : [];
+
+                // 4. UI UPDATE
+                loadSavedContent();
+                updateDashboardStats();
+                initCharts();
+                
+                // 5. UPDATE CHECK (Toujours via localStorage)
+                setTimeout(() => checkGitHubStatus(), 5000);
+
+            } catch(e) {
+                console.error("Erreur Init:", e);
+                alert("Erreur de base de données.");
+            }
         }
 
-
-        // --- APP LOGIC (Green Codex Legacy) ---
-        function compressImage(file, maxWidth = 800, quality = 0.6) {
+        // --- IMAGE HANDLING (Haute Qualité) ---
+        // On compresse moins maintenant ! (1200px et 0.8 quality au lieu de basse res)
+        function compressImage(file, maxWidth = 1200, quality = 0.8) {
             return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.onload = (e) => {
@@ -1048,6 +725,7 @@
             });
         }
 
+        // --- EDIT MODE LOGIC ---
         function toggleEditMode() {
             isEditMode = !isEditMode;
             document.body.classList.toggle('edit-mode-active', isEditMode);
@@ -1055,20 +733,26 @@
             document.getElementById('editModeBtn').classList.toggle('bg-amber-500', isEditMode);
             document.getElementById('add-section-area').classList.toggle('hidden', !isEditMode);
             document.querySelectorAll('[data-editable]').forEach(el => {
-                if(isEditMode) { el.classList.add('editable-highlight'); el.onclick = (e) => { e.preventDefault(); e.stopPropagation(); editContent(e.target.closest('[data-editable]')); }; } 
-                else { el.classList.remove('editable-highlight'); el.onclick = null; }
+                if(isEditMode) { 
+                    el.classList.add('editable-highlight'); 
+                    el.onclick = (e) => { 
+                        e.preventDefault(); e.stopPropagation(); editContent(e.target.closest('[data-editable]')); 
+                    }; 
+                } else { 
+                    el.classList.remove('editable-highlight'); el.onclick = null; 
+                }
             });
             renderCustomSections();
         }
 
-        function editContent(el) {
+        async function editContent(el) {
             if(!isEditMode || !el) return;
             const key = el.getAttribute('data-editable');
             const newText = prompt("Modifier le texte :", el.innerText);
             if(newText !== null && newText !== el.innerText) {
                 el.innerText = newText;
                 contentMap[key] = newText;
-                localStorage.setItem('green_codex_content_v4', JSON.stringify(contentMap));
+                await db.save('config', { key: 'contentMap', value: contentMap });
             }
         }
 
@@ -1080,9 +764,140 @@
             renderCustomSections();
         }
 
-        // --- NEW DETAIL MODAL LOGIC ---
-        function openCollectionDetail(index) {
-            const item = collection[index];
+        // --- COLLECTION LOGIC WITH INDEXEDDB ---
+        
+        async function saveCollectionItem(item) {
+            // Save to DB
+            const id = await db.save('collection', item);
+            // Refresh local array from DB to get fresh IDs
+            collection = await db.getAll('collection');
+            updateDashboardStats();
+            renderCollectionList();
+        }
+
+        async function deleteCollectionItem(id) {
+            if(confirm('Supprimer cette entrée ?')) {
+                await db.delete('collection', id);
+                collection = await db.getAll('collection'); // Refresh
+                updateDashboardStats();
+                renderCollectionList();
+                closeCollectionDetail();
+            }
+        }
+
+        function updateDashboardStats() {
+            document.getElementById('stats-total').innerText = collection.length;
+            document.getElementById('stats-weed').innerText = collection.filter(i => i.category === 'weed').length;
+            document.getElementById('stats-hash').innerText = collection.filter(i => i.category === 'hash').length;
+            document.getElementById('stats-mass').innerText = collection.reduce((acc, curr) => acc + (parseFloat(curr.quantity) || 0), 0).toFixed(1) + 'g';
+        }
+
+        function renderCollectionList() {
+            const container = document.getElementById('collection-list');
+            container.innerHTML = '';
+            document.getElementById('empty-state').classList.toggle('hidden', collection.length > 0);
+            
+            // On inverse pour voir les plus récents en premier
+            const reversed = [...collection].reverse();
+
+            reversed.forEach((item) => {
+                const photosHtml = item.photos && item.photos.length ? `<img src="${item.photos[0]}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-3xl opacity-30">${item.category==='hash'?'🍫':'🥦'}</div>`;
+                const html = `
+                <div onclick="openCollectionDetail(${item.id})" class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 flex gap-4 relative group hover:border-emerald-300 transition cursor-pointer">
+                    <div class="w-20 h-20 rounded-lg bg-slate-100 flex-shrink-0 overflow-hidden relative">
+                        ${photosHtml}
+                        ${item.photos && item.photos.length > 1 ? `<span class="absolute bottom-0 right-0 bg-black/50 text-white text-[10px] px-1">+${item.photos.length-1}</span>` : ''}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-slate-800 truncate pr-2">${item.strain}</h3>
+                            <span class="text-xl">${getFlag(item.country)}</span>
+                        </div>
+                        <p class="text-xs text-slate-500 font-bold uppercase mb-1">${item.commercialName || item.farm || 'Inconnu'}</p>
+                        ${item.type ? `<span class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.5 rounded border border-amber-200 block w-fit mb-1">${item.type}</span>` : ''}
+                        <div class="flex items-center gap-2 mt-2">
+                             <span class="bg-emerald-50 text-emerald-700 text-xs px-2 py-1 rounded font-bold">${item.quantity}g</span>
+                        </div>
+                    </div>
+                </div>`;
+                container.insertAdjacentHTML('beforeend', html);
+            });
+        }
+
+        // --- FORMS & MODALS ---
+        function openCollectionForm(editId = null) {
+            const form = document.getElementById('collection-form'); form.reset();
+            document.getElementById('editId').value = editId || "";
+            document.getElementById('modal-title').innerText = editId ? "Modifier" : "Ajouter";
+            currentPhotos = [];
+            
+            if(editId) {
+                // Find item by ID (Integer check)
+                const item = collection.find(i => i.id == editId);
+                if(item) {
+                    document.getElementById('inp-category').value = item.category;
+                    document.getElementById('inp-quantity').value = item.quantity;
+                    document.getElementById('inp-strain').value = item.strain;
+                    document.getElementById('inp-commercialName').value = item.commercialName;
+                    document.getElementById('inp-country').value = item.country;
+                    document.getElementById('inp-price').value = item.price;
+                    if(item.type) document.getElementById('inp-hashType').value = item.type;
+                    toggleFormFields(item.category);
+                    if(item.photos) currentPhotos = [...item.photos];
+                }
+            } else { toggleFormFields('weed'); }
+            
+            renderPhotoPreviews();
+            document.getElementById('collection-modal').classList.remove('hidden');
+        }
+
+        async function handleCollectionSubmit(e) {
+            e.preventDefault(); 
+            const f = new FormData(e.target);
+            const editIdStr = document.getElementById('editId').value;
+            
+            const item = { 
+                category: f.get('category'), 
+                quantity: f.get('quantity'), 
+                strain: f.get('strain'), 
+                commercialName: f.get('commercialName'), 
+                type: f.get('hashType'), 
+                country: f.get('country'), 
+                price: f.get('price'), 
+                photos: currentPhotos, 
+                date: new Date().toISOString() 
+            };
+
+            if(editIdStr) {
+                item.id = parseInt(editIdStr); // Important for IndexedDB update
+            }
+
+            await saveCollectionItem(item);
+            closeCollectionForm();
+        }
+        
+        function closeCollectionForm() { document.getElementById('collection-modal').classList.add('hidden'); }
+        
+        async function handlePhotos(input) { 
+            if (input.files) { 
+                // Removed 3 photos limit logic for upload (soft limit ok)
+                for (const file of input.files) { 
+                    try { 
+                        // Compress with better quality
+                        const compressed = await compressImage(file, 1200, 0.8); 
+                        currentPhotos.push(compressed); 
+                    } catch(e) {} 
+                } 
+                renderPhotoPreviews(); 
+            } 
+        }
+        function renderPhotoPreviews() { document.getElementById('photo-preview-list').innerHTML = currentPhotos.map((src, i) => `<div class="w-20 h-20 rounded-xl relative overflow-hidden group flex-shrink-0"><img src="${src}" class="w-full h-full object-cover"><button type="button" onclick="currentPhotos.splice(${i}, 1); renderPhotoPreviews();" class="absolute top-0 right-0 bg-red-500 text-white text-xs p-1 opacity-0 group-hover:opacity-100">X</button></div>`).join(''); }
+
+        // --- DETAIL MODAL ---
+        function openCollectionDetail(id) {
+            const item = collection.find(i => i.id == id);
+            if(!item) return;
+
             document.getElementById('cd-strain').innerText = item.strain;
             document.getElementById('cd-commercial').innerText = item.commercialName || item.farm || 'Sans nom';
             document.getElementById('cd-flag').innerText = getFlag(item.country);
@@ -1090,22 +905,12 @@
             document.getElementById('cd-price').innerText = (item.price || '0') + '€';
             document.getElementById('cd-category').innerText = item.category === 'hash' ? 'Hash 🍫' : 'Weed 🥦';
             document.getElementById('cd-date').innerText = new Date(item.date).toLocaleDateString();
-            document.getElementById('cd-farm').innerText = item.farm || item.commercialName || '-';
-            document.getElementById('cd-country').innerText = item.country || '-';
             
-            if(item.category === 'hash' && item.type) {
-                document.getElementById('cd-hash-row').classList.remove('hidden');
-                document.getElementById('cd-hash-type').innerText = item.type;
-            } else {
-                document.getElementById('cd-hash-row').classList.add('hidden');
-            }
+            // Buttons
+            document.getElementById('cd-btn-edit').onclick = () => { closeCollectionDetail(); openCollectionForm(id); };
+            document.getElementById('cd-btn-delete').onclick = () => { deleteCollectionItem(id); };
 
-            // Buttons Logic
-            document.getElementById('cd-btn-edit').onclick = () => { closeCollectionDetail(); openCollectionForm(index); };
-            document.getElementById('cd-btn-delete').onclick = () => { if(confirm('Supprimer ?')) { collection.splice(index, 1); saveCollection(); closeCollectionDetail(); } };
-
-            // Photos Logic
-            const imgContainer = document.getElementById('cd-img-container');
+            // Photos
             const mainImg = document.getElementById('cd-main-img');
             const thumbsContainer = document.getElementById('cd-thumbs');
             thumbsContainer.innerHTML = '';
@@ -1127,117 +932,144 @@
             }
             document.getElementById('collection-detail-modal').classList.remove('hidden');
         }
-
         function closeCollectionDetail() { document.getElementById('collection-detail-modal').classList.add('hidden'); }
 
-        // --- CHARTS ---
+        // --- CUSTOM SECTIONS ---
+        function openSectionModal(id=null) { 
+            document.getElementById('section-form').reset(); document.getElementById('sec-current-image').classList.add('hidden'); currentSectionImage=null; 
+            if(id) { 
+                const s = customSections.find(x => x.id === id); 
+                document.getElementById('sec-id').value = s.id; 
+                document.getElementById('sec-title').value = s.title; 
+                document.getElementById('sec-text').value = s.text; 
+                if(s.image){ currentSectionImage=s.image; document.querySelector('#sec-current-image img').src=s.image; document.getElementById('sec-current-image').classList.remove('hidden'); } 
+            } 
+            document.getElementById('section-modal').classList.remove('hidden'); 
+        }
+        function closeSectionModal() { document.getElementById('section-modal').classList.add('hidden'); }
+        async function handleSectionSubmit(e) { 
+            e.preventDefault(); 
+            const f=e.target; 
+            const id=f.secId.value?parseInt(f.secId.value):Date.now(); 
+            const file=document.getElementById('sec-photo-input').files[0]; 
+            if(file) currentSectionImage = await compressImage(file, 800, 0.7); 
+            
+            const s = { id, title:f.secTitle.value, text:f.secText.value, image:currentSectionImage }; 
+            
+            // Update Array
+            const i = customSections.findIndex(x => x.id === id); 
+            if(i > -1) customSections[i] = s; else customSections.push(s); 
+            
+            // Save to DB
+            await db.save('config', { key: 'customSections', value: customSections });
+            
+            renderCustomSections(); 
+            closeSectionModal(); 
+        }
+        async function deleteCustomSection(id) { 
+            if(confirm('Supprimer ?')) { 
+                customSections = customSections.filter(x => x.id !== id); 
+                await db.save('config', { key: 'customSections', value: customSections });
+                renderCustomSections(); 
+            } 
+        }
+        function renderCustomSections() { 
+            document.getElementById('custom-sections-container').innerHTML = customSections.map((s,i) => `<section class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-emerald-600 relative group animate-fade-in text-justify">${isEditMode?`<div class="absolute top-4 right-4 flex gap-2"><button onclick="openSectionModal(${s.id})" class="text-blue-500 font-bold border border-blue-200 px-3 py-1 rounded hover:bg-blue-50 text-xs">Modifier</button><button onclick="deleteCustomSection(${s.id})" class="text-red-500 font-bold border border-red-200 px-3 py-1 rounded hover:bg-red-50 text-xs">Supprimer</button></div>`:''}<h2 class="section-title">${i+8}. ${s.title}</h2>${s.image?`<img src="${s.image}" class="w-full max-h-96 object-cover rounded-xl mb-6 shadow-sm">`:''}<div class="text-lg leading-relaxed text-slate-600 whitespace-pre-wrap">${s.text}</div></section>`).join(''); 
+        }
+
+        // --- UPDATE SYSTEM & GITHUB ---
+        async function checkGitHubStatus() {
+            if(GITHUB_USERNAME === 'antoto2021') console.log("🔍 Checking GitHub...");
+            const remoteCommit = await fetchLatestCommit();
+            if (!remoteCommit) return;
+            const remoteHash = remoteCommit.sha;
+            const storedHash = localStorage.getItem(UPDATE_STORAGE_KEY); // KEEP LOCALSTORAGE
+
+            if (!storedHash) {
+                localStorage.setItem(UPDATE_STORAGE_KEY, remoteHash);
+                localStorage.setItem(UPDATE_TIME_KEY, Date.now());
+            } else if (storedHash !== remoteHash) {
+                console.log("⚠️ Update Available");
+                triggerUpdateUI();
+                const parsed = parseCommitMessage(remoteCommit.commit.message);
+                if(parsed.length > 0) activeUpdates = parsed;
+            }
+        }
+        async function fetchLatestCommit() {
+            try {
+                const response = await fetch(`https://api.github.com/repos/${GITHUB_USERNAME}/${GITHUB_REPO}/commits?per_page=1&t=${Date.now()}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                return data[0];
+            } catch (error) { return null; }
+        }
+        function triggerUpdateUI() {
+            const dot = document.getElementById('updateDot');
+            const alertBox = document.getElementById('updateAlert');
+            const arrow = document.querySelector('.arrow-pointer');
+            if(dot.style.display !== 'block') {
+                dot.style.display = 'block'; alertBox.style.display = 'flex';
+                arrow.classList.remove('bouncing'); void arrow.offsetWidth; arrow.classList.add('bouncing');
+            }
+        }
+        function forceUpdate() {
+            const btn = document.getElementById('refreshBtn');
+            btn.classList.add('rotating');
+            setTimeout(() => {
+                const baseUrl = window.location.href.split('?')[0];
+                window.location.href = baseUrl + '?v=' + Date.now();
+            }, 500);
+        }
+        async function handlePostUpdate() {
+             const commit = await fetchLatestCommit();
+             if (!commit) return; 
+             const remoteHash = commit.sha;
+             const storedHash = localStorage.getItem(UPDATE_STORAGE_KEY);
+             if (storedHash === remoteHash) {
+                const url = new URL(window.location.href); url.searchParams.delete('v');
+                window.history.replaceState({}, document.title, url.toString()); return; 
+             }
+             const overlay = document.getElementById('wn-overlay');
+             overlay.style.display = 'flex'; setTimeout(() => overlay.classList.add('show-modal'), 10);
+             localStorage.setItem(UPDATE_STORAGE_KEY, remoteHash); localStorage.setItem(UPDATE_TIME_KEY, Date.now());
+             const parsed = parseCommitMessage(commit.commit.message);
+             if (parsed.length > 0) activeUpdates = parsed;
+             renderSlides(); updateSlideUI(); document.getElementById('wn-btn').style.display = 'flex';
+        }
+
+        // --- UTILS (Charts, Parsing, Toggles) ---
+        function parseCommitMessage(msg) { const lines = msg.split('\n'); const foundUpdates = []; const emojiRegex = /(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu; lines.forEach(line => { const cleanLine = line.trim(); if (cleanLine.match(/^[*+-]\s/)) { let content = cleanLine.substring(2).trim(); const parts = content.split(':'); if (parts.length >= 2) { const titlePart = parts[0].trim(); const descPart = parts.slice(1).join(':').trim(); let icon = "✨"; let title = titlePart; const match = titlePart.match(emojiRegex); if (match && titlePart.indexOf(match[0]) === 0) { icon = match[0]; title = titlePart.replace(match[0], '').trim(); } foundUpdates.push({ icon, title, desc: descPart }); } } }); return foundUpdates; }
+        function renderSlides() { const container = document.getElementById('wn-content'); const dotsContainer = document.getElementById('wn-dots'); if(activeUpdates.length === 0) { container.innerHTML = `<div class="wn-slide" style="display:block"><span class="wn-icon">🚀</span><span class="wn-slide-title">Mise à jour effectuée</span><p class="wn-desc">L'application est à jour.</p></div>`; return; } container.innerHTML = activeUpdates.map((slide, index) => `<div class="wn-slide" id="slide-${index}"><span class="wn-icon">${slide.icon}</span><span class="wn-slide-title">${slide.title}</span><p class="wn-desc">${slide.desc}</p></div>`).join(''); dotsContainer.innerHTML = activeUpdates.map((_, index) => `<div class="wn-dot" id="dot-${index}"></div>`).join(''); }
+        function updateSlideUI() { document.querySelectorAll('.wn-slide').forEach((el, index) => { el.style.display = index === currentSlide ? 'block' : 'none'; }); document.querySelectorAll('.wn-dot').forEach((el, index) => { if(index === currentSlide) el.classList.add('active'); else el.classList.remove('active'); }); const btn = document.getElementById('wn-btn'); if (currentSlide === activeUpdates.length - 1) { btn.innerHTML = "C'est noté ✅"; btn.style.backgroundColor = "#166534"; } else { btn.innerHTML = "Suivant ➜"; btn.style.backgroundColor = "#15803d"; } }
+        function nextSlide() { if (currentSlide < activeUpdates.length - 1) { currentSlide++; updateSlideUI(); } else { closePopup(); } }
+        function closePopup() { const overlay = document.getElementById('wn-overlay'); overlay.classList.remove('show-modal'); setTimeout(() => { overlay.style.display = 'none'; const badge = document.getElementById('wn-badge-text'); badge.innerText = "Mise à jour détectée"; badge.style.backgroundColor = "#dcfce7"; badge.style.color = "#166534"; document.getElementById('wn-main-title').innerText = "Quoi de neuf ?"; const url = new URL(window.location.href); if(url.searchParams.has('v')) { url.searchParams.delete('v'); window.history.replaceState({}, document.title, url.toString()); } }, 300); }
+        function openTutorial() { activeUpdates = tutorialSlides; currentSlide = 0; const badge = document.getElementById('wn-badge-text'); badge.innerText = "Tutoriel"; badge.style.backgroundColor = "#F59E0B"; badge.style.color = "#fff"; document.getElementById('wn-main-title').innerText = "Guide Rapide"; const overlay = document.getElementById('wn-overlay'); overlay.style.display = 'flex'; setTimeout(() => overlay.classList.add('show-modal'), 10); renderSlides(); updateSlideUI(); document.getElementById('wn-btn').style.display = 'flex'; }
+        
+        // Basic Info View & Toggles
+        function toggleSection(id) { const el = document.getElementById(id); if(el) el.classList.toggle('expanded'); }
+        async function renderInfoView() { const localHash = localStorage.getItem(UPDATE_STORAGE_KEY) || 'Aucun'; document.getElementById('info-local-hash').innerText = localHash.substring(0, 7) + (localHash.length > 7 ? '...' : ''); const localTs = localStorage.getItem(UPDATE_TIME_KEY); if(localTs) { const diff = Date.now() - parseInt(localTs); const minutes = Math.floor(diff / 60000); const hours = Math.floor(minutes / 60); const days = Math.floor(hours / 24); let timeString = "Il y a quelques instants"; if(days > 0) timeString = `Il y a ${days} jour(s)`; else if(hours > 0) timeString = `Il y a ${hours} heure(s)`; else if(minutes > 0) timeString = `Il y a ${minutes} minute(s)`; document.getElementById('info-local-date').innerText = timeString; } else { document.getElementById('info-local-date').innerText = "Inconnue"; } const statusDot = document.getElementById('connection-status'); const remoteEl = document.getElementById('info-remote-hash'); remoteEl.innerText = "Check..."; statusDot.className = "w-2 h-2 rounded-full bg-gray-400"; const remoteCommit = await fetchLatestCommit(); if(remoteCommit) { remoteEl.innerText = remoteCommit.sha.substring(0, 7) + '...'; statusDot.classList.remove('bg-gray-400'); statusDot.classList.add('bg-green-500'); } else { remoteEl.innerText = "Hors ligne"; statusDot.classList.remove('bg-gray-400'); statusDot.classList.add('bg-red-500'); } }
+
+        function getFlag(c) { if(!c) return '🏳️'; const m = {'france':'🇫🇷','espagne':'🇪🇸','spain':'🇪🇸','usa':'🇺🇸','cali':'🇺🇸','maroc':'🇲🇦','morocco':'🇲🇦','suisse':'🇨🇭','italie':'🇮🇹','canada':'🇨🇦','uk':'🇬🇧','angleterre':'🇬🇧','allemagne':'🇩🇪','thailande':'🇹🇭','pays-bas':'🇳🇱','hollande':'🇳🇱','netherlands':'🇳🇱','belgique':'🇧🇪'}; for(let k in m) if(c.toLowerCase().includes(k)) return m[k]; return '🏳️'; }
+        function toggleFormFields(cat) { document.getElementById('hash-fields').classList.toggle('hidden', cat !== 'hash'); }
         const initCharts = () => { new Chart(document.getElementById('potencyChart'), { type: 'bar', data: { labels: ['Sativa', 'Indica', 'Exotic', 'Dry Sift', 'Ice-O-Lator', 'Rosin', 'BHO'], datasets: [{ label: '% THC', data: [15,20,28,40,65,75,90], backgroundColor: ['#10B981','#10B981','#10B981','#D97706','#2563EB','#9333EA','#64748B'], borderRadius: 4 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: {legend:false} } }); updateComparator(); const trace = { x: Object.values(masterData).map(d => d.matrix.x), y: Object.values(masterData).map(d => d.matrix.y), text: Object.values(masterData).map(d => d.name), mode: 'markers+text', type: 'scatter', textposition: 'top center', marker: { size: 30, color: Object.values(masterData).map(d => d.hex) } }; Plotly.newPlot('globalMatrixPlot', [trace], { xaxis: {title:'Pureté', range:[0,100]}, yaxis: {title:'Solidité', range:[0,12]}, margin:{t:20,l:40}, paper_bgcolor:'rgba(0,0,0,0)', plot_bgcolor:'rgba(0,0,0,0)' }, {displayModeBar:false}); };
         let comparatorChart;
         function updateComparator() { const dA = masterData[document.getElementById('selectA').value || "weed_sativa"], dB = masterData[document.getElementById('selectB').value || "hash_rosin"]; if(comparatorChart) comparatorChart.destroy(); comparatorChart = new Chart(document.getElementById('comparatorRadar'), { type: 'radar', data: { labels: ['Fruité', 'Terreux', 'Physique', 'Odeur', 'Intensité'], datasets: [ { label: dA.name, data: dA.radar, borderColor: '#3B82F6', backgroundColor: 'rgba(59,130,246,0.2)' }, { label: dB.name, data: dB.radar, borderColor: '#EC4899', backgroundColor: 'rgba(236,72,153,0.2)' } ] }, options: { responsive: true, maintainAspectRatio: false, scales: { r: { suggestedMin:0, suggestedMax:100 } } } }); }
         function showDetail(key) { const d = masterData[key]; showView('detail'); document.getElementById('detail-header').className = `bg-white p-8 rounded-2xl shadow-lg border-t-8 border-${d.color}-500`; document.getElementById('detail-badge').innerText = d.badge; document.getElementById('detail-badge').className = `px-3 py-1 rounded-full text-sm font-bold uppercase mb-2 inline-block bg-${d.color}-100 text-${d.color}-800`; document.getElementById('detail-title').innerText = d.name; document.getElementById('detail-title').className = `text-4xl md:text-5xl font-black text-${d.color}-900`; document.getElementById('detail-icon').innerText = d.icon; document.getElementById('detail-desc').innerText = d.desc; document.getElementById('detail-desc').className = `text-lg text-slate-600 border-l-4 border-${d.color}-200 pl-4 text-justify`; document.getElementById('detail-flow').innerHTML = d.process.map(s => `<div class="bg-slate-700 p-4 rounded-lg border border-slate-600"><div class="text-xs text-${d.color}-400 font-mono uppercase">${s.t}</div><div class="font-bold">${s.d}</div></div>`).join(''); const cvs1 = document.getElementById('detailRadarChart'); const cvs2 = document.getElementById('detailBarChart'); if(cvs1.chart) cvs1.chart.destroy(); if(cvs2.chart) cvs2.chart.destroy(); cvs1.chart = new Chart(cvs1, { type: 'radar', data: { labels: ['Fruité','Terreux','Physique','Odeur','Intensité'], datasets: [{ label: d.name, data: d.radar, backgroundColor: `${d.hex}33`, borderColor: d.hex, fill: true }] }, options: { maintainAspectRatio: false, plugins: {legend:false} } }); cvs2.chart = new Chart(cvs2, { type: 'bar', data: { labels: ['Rendement','Puissance','Prix','Tech'], datasets: [{ data: d.metrics, backgroundColor: d.hex, borderRadius: 6 }] }, options: { maintainAspectRatio: false, plugins: {legend:false}, scales: {y:{max:100}} } }); }
 
-        // --- COLLECTION ---
-        function saveCollection() { try { localStorage.setItem('green_codex_collection_v4', JSON.stringify(collection)); updateDashboardStats(); renderCollectionList(); } catch (e) { alert("Stockage plein."); } }
-        function updateDashboardStats() { document.getElementById('stats-total').innerText = collection.length; document.getElementById('stats-weed').innerText = collection.filter(i => i.category === 'weed').length; document.getElementById('stats-hash').innerText = collection.filter(i => i.category === 'hash').length; document.getElementById('stats-mass').innerText = collection.reduce((acc, curr) => acc + (parseFloat(curr.quantity) || 0), 0).toFixed(1) + 'g'; }
-        function getFlag(c) { if(!c) return '🏳️'; const m = {'france':'🇫🇷','espagne':'🇪🇸','spain':'🇪🇸','usa':'🇺🇸','cali':'🇺🇸','maroc':'🇲🇦','morocco':'🇲🇦','suisse':'🇨🇭','italie':'🇮🇹','canada':'🇨🇦','uk':'🇬🇧','angleterre':'🇬🇧','allemagne':'🇩🇪','thailande':'🇹🇭','pays-bas':'🇳🇱','hollande':'🇳🇱','netherlands':'🇳🇱','belgique':'🇧🇪'}; for(let k in m) if(c.toLowerCase().includes(k)) return m[k]; return '🏳️'; }
-
-        function renderCollectionList() {
-            const container = document.getElementById('collection-list');
-            container.innerHTML = '';
-            document.getElementById('empty-state').classList.toggle('hidden', collection.length > 0);
-            collection.forEach((item, index) => {
-                const photosHtml = item.photos && item.photos.length ? `<img src="${item.photos[0]}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-3xl opacity-30">${item.category==='hash'?'🍫':'🥦'}</div>`;
-                const html = `
-                <div onclick="openCollectionDetail(${index})" class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 flex gap-4 relative group hover:border-emerald-300 transition cursor-pointer">
-                    <div class="w-20 h-20 rounded-lg bg-slate-100 flex-shrink-0 overflow-hidden relative">
-                        ${photosHtml}
-                        ${item.photos && item.photos.length > 1 ? `<span class="absolute bottom-0 right-0 bg-black/50 text-white text-[10px] px-1">+${item.photos.length-1}</span>` : ''}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-slate-800 truncate pr-2">${item.strain}</h3>
-                            <span class="text-xl">${getFlag(item.country)}</span>
-                        </div>
-                        <p class="text-xs text-slate-500 font-bold uppercase mb-1">${item.commercialName || item.farm || 'Inconnu'}</p>
-                        ${item.type ? `<span class="bg-amber-100 text-amber-800 text-[10px] px-1.5 py-0.5 rounded border border-amber-200 block w-fit mb-1">${item.type}</span>` : ''}
-                        <div class="flex items-center gap-2 mt-2">
-                             <span class="bg-emerald-50 text-emerald-700 text-xs px-2 py-1 rounded font-bold">${item.quantity}g</span>
-                             <div class="ml-auto flex gap-1">
-                                <button onclick="event.stopPropagation(); openCollectionForm(${index})" class="text-blue-400 hover:text-blue-600 p-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
-                                <button onclick="event.stopPropagation(); deleteItem(${index})" class="text-red-400 hover:text-red-600 p-1"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
-                             </div>
-                        </div>
-                    </div>
-                </div>`;
-                container.insertAdjacentHTML('beforeend', html);
-            });
-        }
-
-        // --- FORMS ---
-        function openCollectionForm(editIndex = -1) {
-            const form = document.getElementById('collection-form'); form.reset();
-            document.getElementById('editIndex').value = editIndex;
-            document.getElementById('modal-title').innerText = editIndex === -1 ? "Ajouter" : "Modifier";
-            currentPhotos = [];
-            if(editIndex > -1) {
-                const item = collection[editIndex];
-                document.getElementById('inp-category').value = item.category;
-                document.getElementById('inp-quantity').value = item.quantity;
-                document.getElementById('inp-strain').value = item.strain;
-                document.getElementById('inp-commercialName').value = item.commercialName;
-                document.getElementById('inp-country').value = item.country;
-                if(item.farm) document.getElementById('inp-commercialName').value = item.farm; // Backwards compatibility
-                document.getElementById('inp-price').value = item.price;
-                if(item.type) document.getElementById('inp-hashType').value = item.type;
-                toggleFormFields(item.category);
-                if(item.photos) currentPhotos = [...item.photos];
-            } else { toggleFormFields('weed'); }
-            renderPhotoPreviews();
-            document.getElementById('collection-modal').classList.remove('hidden');
-        }
-        function closeCollectionForm() { document.getElementById('collection-modal').classList.add('hidden'); }
-        function toggleFormFields(cat) { document.getElementById('hash-fields').classList.toggle('hidden', cat !== 'hash'); }
-        async function handlePhotos(input) { if (input.files) { const rem = 3 - currentPhotos.length; if(rem <= 0) { alert("Max 3 photos !"); return; } const files = Array.from(input.files).slice(0, rem); for (const file of files) { try { const compressed = await compressImage(file); currentPhotos.push(compressed); } catch(e) {} } renderPhotoPreviews(); } }
-        function removePhoto(idx) { currentPhotos.splice(idx, 1); renderPhotoPreviews(); }
-        function renderPhotoPreviews() { document.getElementById('photo-preview-list').innerHTML = currentPhotos.map((src, i) => `<div class="w-20 h-20 rounded-xl relative overflow-hidden group"><img src="${src}" class="w-full h-full object-cover"><button type="button" onclick="removePhoto(${i})" class="absolute top-0 right-0 bg-red-500 text-white text-xs p-1 opacity-0 group-hover:opacity-100">X</button></div>`).join(''); }
-        function handleCollectionSubmit(e) {
-            e.preventDefault(); const f = new FormData(e.target); const idx = parseInt(document.getElementById('editIndex').value);
-            const item = { category: f.get('category'), quantity: f.get('quantity'), strain: f.get('strain'), commercialName: f.get('commercialName'), type: f.get('hashType'), country: f.get('country'), price: f.get('price'), photos: currentPhotos, date: new Date().toISOString() };
-            if(idx > -1) collection[idx] = item; else collection.unshift(item);
-            saveCollection(); closeCollectionForm();
-        }
-        function deleteItem(index) { if(confirm('Supprimer ?')) { collection.splice(index, 1); saveCollection(); } }
-
-        // --- SECTIONS ---
-        function openSectionModal(id=null) { document.getElementById('section-form').reset(); document.getElementById('sec-current-image').classList.add('hidden'); currentSectionImage=null; if(id) { const s=customSections.find(x=>x.id===id); document.getElementById('sec-id').value=s.id; document.getElementById('sec-title').value=s.title; document.getElementById('sec-text').value=s.text; if(s.image){ currentSectionImage=s.image; document.querySelector('#sec-current-image img').src=s.image; document.getElementById('sec-current-image').classList.remove('hidden'); } } document.getElementById('section-modal').classList.remove('hidden'); }
-        function closeSectionModal() { document.getElementById('section-modal').classList.add('hidden'); }
-        async function handleSectionSubmit(e) { e.preventDefault(); const f=e.target; const id=f.secId.value?parseInt(f.secId.value):Date.now(); const file=document.getElementById('sec-photo-input').files[0]; if(file) currentSectionImage=await compressImage(file); const s={id, title:f.secTitle.value, text:f.secText.value, image:currentSectionImage}; const i=customSections.findIndex(x=>x.id===id); if(i>-1) customSections[i]=s; else customSections.push(s); localStorage.setItem('green_codex_custom_sections_v4',JSON.stringify(customSections)); renderCustomSections(); closeSectionModal(); }
-        function deleteCustomSection(id) { if(confirm('Supprimer ?')) { customSections=customSections.filter(x=>x.id!==id); localStorage.setItem('green_codex_custom_sections_v4',JSON.stringify(customSections)); renderCustomSections(); } }
-        function renderCustomSections() { document.getElementById('custom-sections-container').innerHTML = customSections.map((s,i) => `<section class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-emerald-600 relative group animate-fade-in text-justify">${isEditMode?`<div class="absolute top-4 right-4 flex gap-2"><button onclick="openSectionModal(${s.id})" class="text-blue-500 font-bold border border-blue-200 px-3 py-1 rounded hover:bg-blue-50 text-xs">Modifier</button><button onclick="deleteCustomSection(${s.id})" class="text-red-500 font-bold border border-red-200 px-3 py-1 rounded hover:bg-red-50 text-xs">Supprimer</button></div>`:''}<h2 class="section-title">${i+8}. ${s.title}</h2>${s.image?`<img src="${s.image}" class="w-full max-h-96 object-cover rounded-xl mb-6 shadow-sm">`:''}<div class="text-lg leading-relaxed text-slate-600 whitespace-pre-wrap">${s.text}</div></section>`).join(''); }
-
-        // INIT
+        // --- INIT ---
         window.addEventListener('load', () => { 
             const urlParams = new URLSearchParams(window.location.search);
-            const isPostUpdate = urlParams.has('v');
-
-            // 1. Initialiser les graphiques Green Codex
-            initCharts(); 
-            loadSavedContent(); 
-            updateDashboardStats(); 
-            
             // Populate Selects
             const sA = document.getElementById('selectA'), sB = document.getElementById('selectB');
             Object.keys(masterData).forEach(k => { sA.add(new Option(masterData[k].name, k)); sB.add(new Option(masterData[k].name, k)); });
-            sA.value = "weed_sativa"; sB.value = "hash_rosin"; updateComparator();
-
-            // 2. Démarrer le système de mise à jour
-            startUpdateCheckTimer();
-
-            // 3. Gestion Post-Update (Pop-up)
-            if (isPostUpdate) {
-                handlePostUpdate();
-            }
+            sA.value = "weed_sativa"; sB.value = "hash_rosin";
+            
+            // LAUNCH APP (DB INIT)
+            initApp().then(() => {
+                if (urlParams.has('v')) handlePostUpdate();
+            });
         });
     </script>
 </body>
 </html>
+
