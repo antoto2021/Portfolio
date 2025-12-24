@@ -139,6 +139,11 @@
                 <p class="text-xs md:text-sm text-emerald-200" data-editable="app_subtitle">Encyclopédie Cannabique & Collection Personnel</p>
             </div>
             <div class="flex gap-2">
+                <!-- Bouton INFO ajouté ici -->
+                <button onclick="showView('info')" class="bg-white/10 hover:bg-white/20 text-white w-10 h-10 rounded-lg text-lg font-bold transition flex items-center justify-center border border-white/20">
+                    ℹ️
+                </button>
+                
                 <button onclick="toggleEditMode()" id="editModeBtn" class="bg-white/10 hover:bg-white/20 text-white px-3 py-2 rounded-lg text-sm font-bold transition flex items-center gap-2 border border-white/20">
                     <span>✏️</span> <span class="hidden md:inline">Mode Édition</span>
                 </button>
@@ -223,7 +228,7 @@
                     <div onclick="showDetail('hash_water')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500 card-interactive group">
                         <div class="flex justify-between"> <div class="text-4xl mb-4">❄️</div> <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded h-fit">PURETÉ</span> </div>
                         <h3 class="text-xl font-bold text-slate-800 group-hover:text-blue-600">Ice-O-Lator</h3>
-                        <p class="text-sm text-slate-500 text-justify mt-2">L'extraction à l'eau et glace (Solventless), utilise l'eau glacée pour extraire les trichomes. Le froid rend les glandes de résine cassantes, facilitant 
+                        <p class="text-sm text-slate-500 text-justify mt-2">Extraction à l'eau et glace (Solventless), utilise l'eau glacée pour extraire les trichomes. Le froid rend les glandes de résine cassantes, facilitant 
                             leur séparation par agitation. Le mélange est ensuite filtré à travers plusieurs sacs aux mailles de plus en plus serrées pour obtenir de l'Ice-O-Lator ou Bubble Hash.</p>
                     </div>
                     <div onclick="showDetail('hash_rosin')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-purple-500 card-interactive group">
@@ -374,6 +379,41 @@
             <div id="empty-state" class="hidden text-center py-20 text-slate-400">
                 <div class="text-6xl mb-4">📭</div>
                 <p>Votre collection est vide.</p>
+            </div>
+        </div>
+
+        <!-- ==================== VIEW: INFO (NEW) ==================== -->
+        <div id="view-info" class="hidden fade-in space-y-8">
+            <div class="bg-white p-8 rounded-2xl shadow-lg border-l-8 border-blue-500">
+                <h2 class="text-3xl font-black text-slate-800 mb-6 flex items-center gap-3">
+                    ℹ️ Informations Version
+                </h2>
+                
+                <!-- Bloc Version Locale -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 mb-6">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Version Installée (Local)</h3>
+                    <div class="font-mono text-xl md:text-2xl font-bold text-slate-800 break-all" id="info-local-hash">
+                        -
+                    </div>
+                    <p class="text-sm text-blue-600 mt-2 font-bold" id="info-local-date">
+                        Date inconnue
+                    </p>
+                </div>
+
+                <!-- Bloc Version GitHub -->
+                <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Dernière Version (GitHub)</h3>
+                    <div class="font-mono text-xl md:text-2xl font-bold text-slate-800 break-all" id="info-remote-hash">
+                        Vérification...
+                    </div>
+                    <p class="text-xs text-slate-400 mt-2">
+                        Récupéré en temps réel via l'API GitHub
+                    </p>
+                </div>
+
+                <button onclick="forceUpdate()" class="mt-8 w-full bg-blue-600 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-blue-500 transition">
+                    Forcer la recherche de mise à jour
+                </button>
             </div>
         </div>
 
@@ -572,6 +612,8 @@
         
         // Clé de stockage pour le hash de version
         const UPDATE_STORAGE_KEY = 'green_codex_last_hash';
+        // Clé de stockage pour la date de la dernière mise à jour
+        const UPDATE_TIME_KEY    = 'green_codex_update_timestamp';
 
         // ============================================================
 
@@ -597,8 +639,14 @@
             document.getElementById(`view-${viewId}`).classList.remove('hidden');
             document.getElementById('navBackBtn').classList.toggle('hidden', viewId === 'home');
             document.getElementById('editModeBtn').classList.toggle('hidden', viewId !== 'home');
+            
+            // Masquer ou afficher le bouton info selon la vue
+            const infoBtn = document.querySelector('button[onclick="showView(\'info\')"]');
+            if(infoBtn) infoBtn.style.display = (viewId === 'home' || viewId === 'info') ? 'flex' : 'none';
+
             window.scrollTo(0,0);
             if(viewId === 'collection') renderCollectionList();
+            if(viewId === 'info') renderInfoView();
         }
 
         // ============================================================
@@ -625,9 +673,10 @@
 
             // 2. Logique de comparaison
             if (!storedHash) {
-                // Cas A : Premier lancement -> on stocke juste l'état actuel
+                // Cas A : Premier lancement -> on stocke juste l'état actuel et la date
                 console.log("Premier lancement ou reset. Sauvegarde du hash.");
                 localStorage.setItem(UPDATE_STORAGE_KEY, remoteHash);
+                localStorage.setItem(UPDATE_TIME_KEY, Date.now());
             } else if (storedHash !== remoteHash) {
                 // Cas B : Différence détectée -> Mise à jour dispo !
                 console.log("⚠️ Mise à jour disponible !");
@@ -667,8 +716,9 @@
             overlay.style.display = 'flex';
             setTimeout(() => overlay.classList.add('show-modal'), 10);
 
-            // 4. Sauvegarder le NOUVEAU hash comme référence
+            // 4. Sauvegarder le NOUVEAU hash comme référence ET la date
             localStorage.setItem(UPDATE_STORAGE_KEY, remoteHash);
+            localStorage.setItem(UPDATE_TIME_KEY, Date.now());
             console.log("Nouveau hash sauvegardé après maj : " + remoteHash);
 
             // 5. Remplir le popup
@@ -678,6 +728,41 @@
             renderSlides();
             updateSlideUI();
             document.getElementById('wn-btn').style.display = 'flex';
+        }
+
+        // --- INFO VIEW LOGIC ---
+
+        async function renderInfoView() {
+            // 1. Hash Local
+            const localHash = localStorage.getItem(UPDATE_STORAGE_KEY) || 'Aucun';
+            document.getElementById('info-local-hash').innerText = localHash.substring(0, 7) + (localHash.length > 7 ? '...' : '');
+            
+            // 2. Date Locale
+            const localTs = localStorage.getItem(UPDATE_TIME_KEY);
+            if(localTs) {
+                const diff = Date.now() - parseInt(localTs);
+                const minutes = Math.floor(diff / 60000);
+                const hours = Math.floor(minutes / 60);
+                const days = Math.floor(hours / 24);
+
+                let timeString = "Il y a quelques instants";
+                if(days > 0) timeString = `Il y a ${days} jour(s)`;
+                else if(hours > 0) timeString = `Il y a ${hours} heure(s)`;
+                else if(minutes > 0) timeString = `Il y a ${minutes} minute(s)`;
+                
+                document.getElementById('info-local-date').innerText = timeString;
+            } else {
+                document.getElementById('info-local-date').innerText = "Date d'installation inconnue";
+            }
+
+            // 3. Remote Hash
+            document.getElementById('info-remote-hash').innerText = "Chargement...";
+            const remoteCommit = await fetchLatestCommit();
+            if(remoteCommit) {
+                document.getElementById('info-remote-hash').innerText = remoteCommit.sha.substring(0, 7) + '...';
+            } else {
+                document.getElementById('info-remote-hash').innerText = "Erreur de connexion";
+            }
         }
 
         // --- OUTILS API GITHUB ---
@@ -1026,3 +1111,4 @@
     </script>
 </body>
 </html>
+
