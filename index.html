@@ -176,7 +176,7 @@
         <!-- ==================== VIEW: HOME ==================== -->
         <div id="view-home" class="fade-in space-y-16">
             
-            <!-- INTRO (MODIFIÉ: Premier paragraphe visible) -->
+            <!-- INTRO -->
             <section id="intro-card" class="bg-white rounded-2xl shadow-md p-8 border-l-8 border-emerald-600 relative group transition-all duration-300">
                 <div class="flex items-center gap-2 mb-2 cursor-pointer" onclick="toggleSection('intro-card')">
                     <h2 class="section-title mb-0" data-editable="intro_title">L'Odyssée de la Plante</h2>
@@ -203,7 +203,7 @@
                 </button>
             </section>
 
-            <!-- MY COLLECTION PREVIEW (MODIFIÉ: Indicateur espace) -->
+            <!-- MY COLLECTION PREVIEW -->
             <section id="my-collection-preview" class="bg-slate-900 rounded-2xl p-8 text-white relative overflow-hidden shadow-xl">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500 rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
                 <div class="relative z-10">
@@ -410,7 +410,7 @@
                         </div>
                         <div class="pl-2 text-right">
                              <div class="flex items-center justify-end gap-2 mb-1">
-                                <span class="text-[10px] font-bold text-emerald-700 uppercase">GitHub</span>
+                                <span class="text-[10px] font-bold text-emerald-700 uppercase">Disponible (GitHub)</span>
                                 <div id="connection-status" class="w-2 h-2 rounded-full bg-gray-400"></div>
                             </div>
                             <div class="font-mono text-xs font-bold text-emerald-600 break-all" id="info-remote-hash">...</div>
@@ -482,6 +482,11 @@
                     <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Pays</label><input type="text" name="country" id="inp-country" class="input-field" placeholder="ex: Pays-Bas"></div>
                     <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Prix (€)</label><input type="number" name="price" id="inp-price" class="input-field" placeholder="ex: 50"></div>
                 </div>
+                <!-- AJOUT OBSERVATION -->
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-500 uppercase">Observations</label>
+                    <textarea name="observation" id="inp-observation" class="input-field" placeholder="Effets, saveurs, notes personnelles..." rows="3"></textarea>
+                </div>
                 <div class="space-y-1">
                     <label class="text-xs font-bold text-slate-500 uppercase">Photos (HD Illimité)</label>
                     <div class="flex gap-2 items-center">
@@ -502,7 +507,7 @@
     <!-- MODAL: SECTION ADD -->
     <div id="section-modal" class="hidden fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6">
-            <h3 class="text-2xl font-bold text-slate-800 mb-6">Ajouter une Section</h3>
+            <h3 class="text-2xl font-bold text-slate-800 mb-6" id="section-modal-title">Ajouter une Section</h3>
             <form id="section-form" onsubmit="handleSectionSubmit(event)" class="space-y-4">
                 <input type="hidden" name="secId" id="sec-id">
                 <div class="space-y-1"><label class="text-xs font-bold text-slate-500 uppercase">Titre</label><input type="text" name="secTitle" id="sec-title" class="input-field font-bold" required></div>
@@ -535,6 +540,12 @@
                     <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center"><span class="text-[10px] uppercase text-slate-400 font-bold block">Type</span><span id="cd-category" class="text-lg font-bold text-slate-700">Weed</span></div>
                     <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center"><span class="text-[10px] uppercase text-slate-400 font-bold block">Date</span><span id="cd-date" class="text-sm font-bold text-slate-700">...</span></div>
                 </div>
+                <!-- AJOUT DETAIL OBSERVATION -->
+                <div id="cd-observation-container" class="bg-slate-50 p-4 rounded-xl border border-slate-100 mb-6 hidden">
+                    <h4 class="text-xs font-bold text-slate-500 uppercase mb-2">Observations</h4>
+                    <p id="cd-observation" class="text-sm text-slate-700 italic text-justify"></p>
+                </div>
+                
                 <div class="flex gap-3">
                     <button id="cd-btn-edit" class="flex-1 py-3 rounded-xl border border-blue-200 text-blue-600 font-bold hover:bg-blue-50 transition">Modifier</button>
                     <button id="cd-btn-delete" class="flex-1 py-3 rounded-xl border border-red-200 text-red-500 font-bold hover:bg-red-50 transition">Supprimer</button>
@@ -634,10 +645,15 @@
 
         const tutorialSlides = [
             { icon: "👋", title: "Bienvenue !", desc: "Découvrez Green Codex, votre encyclopédie cannabique interactive et personnelle." },
-            { icon: "📖", title: "Encyclopédie", desc: "Explorez les fiches techniques : Indica, Sativa, Dry Sift... Tout le savoir à portée de main." },
-            { icon: "📊", title: "Radars", desc: "Visualisez instantanément le profil aromatique et les effets grâce aux graphiques radars." },
-            { icon: "📂", title: "Collection", desc: "Ajoutez vos découvertes. Grâce à IndexedDB, le stockage est illimité et sécurisé." },
-            { icon: "✏️", title: "Mode Édition", desc: "Activez le mode édition pour réécrire les textes. Vos modifications sont sauvegardées." }
+            { icon: "📖", title: "Encyclopédie", desc: "Explorez les fiches techniques : Indica, Sativa, Dry Sift, Rosin... Tout le savoir à portée de main." },
+            { icon: "📊", title: "Radars", desc: "Visualisez instantanément le profil aromatique et les effets grâce aux graphiques radars dynamiques." },
+            { icon: "⚖️", title: "Comparateur", desc: "Hésitation entre deux variétés ? Superposez leurs graphiques pour voir leurs différences." },
+            { icon: "📂", title: "Collection", desc: "Créez votre 'Pokedex' personnel ! Ajoutez chaque variété que vous goûtez." },
+            { icon: "📝", title: "Détails", desc: "Indiquer la farm, la strain, la quantité et le pays d'origine pour chaque entrée." },
+            { icon: "📸", title: "Photos", desc: "Immortalisez vos plus belles fleurs. Ajoutez jusqu'à 3 photos par fiche." },
+            { icon: "✏️", title: "Mode Édition", desc: "C'est VOTRE appli. Activez le mode édition (en haut) pour réécrire les textes et titres." },
+            { icon: "🔄", title: "Mises à jour", desc: "Connectée à GitHub, l'appli évolue automatiquement. Vos données restent sécurisées sur votre téléphone." },
+            { icon: "🚀", title: "C'est parti !", desc: "Vous êtes prêt. Commencez à explorer et à construire votre collection dès maintenant." }
         ];
 
         // --- CORE FUNCTIONS ---
@@ -866,6 +882,10 @@
                     document.getElementById('inp-country').value = item.country;
                     document.getElementById('inp-price').value = item.price;
                     if(item.type) document.getElementById('inp-hashType').value = item.type;
+                    
+                    // Populate Observation
+                    document.getElementById('inp-observation').value = item.observation || "";
+
                     toggleFormFields(item.category);
                     if(item.photos) currentPhotos = [...item.photos];
                 }
@@ -888,6 +908,7 @@
                 type: f.get('hashType'), 
                 country: f.get('country'), 
                 price: f.get('price'), 
+                observation: f.get('observation'), // Added observation
                 photos: currentPhotos, 
                 date: new Date().toISOString() 
             };
@@ -930,6 +951,14 @@
             document.getElementById('cd-category').innerText = item.category === 'hash' ? 'Hash 🍫' : 'Weed 🥦';
             document.getElementById('cd-date').innerText = new Date(item.date).toLocaleDateString();
             
+            // Handle Observation Display
+            if (item.observation) {
+                document.getElementById('cd-observation').innerText = item.observation;
+                document.getElementById('cd-observation-container').classList.remove('hidden');
+            } else {
+                document.getElementById('cd-observation-container').classList.add('hidden');
+            }
+
             // Buttons
             document.getElementById('cd-btn-edit').onclick = () => { closeCollectionDetail(); openCollectionForm(id); };
             document.getElementById('cd-btn-delete').onclick = () => { deleteCollectionItem(id); };
@@ -1096,4 +1125,3 @@
     </script>
 </body>
 </html>
-
