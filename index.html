@@ -570,44 +570,49 @@
 
 	<!-- MODAL Bulle "Spots"-->
 	<div id="cali-spot-modal" class="hidden fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6">
-            <h3 id="csm-title" class="text-2xl font-bold text-slate-800 mb-4">Nouveau Lieu</h3>
-            <form onsubmit="handleCaliSpotSubmit(event)" class="space-y-4">
-                <input type="hidden" id="csm-type"> <div class="grid grid-cols-4 gap-4">
-                    <div class="col-span-1"><label class="text-[10px] font-bold uppercase text-slate-400">Emoji</label><input type="text" id="csm-emoji" class="input-field text-center text-2xl" placeholder="📍" required></div>
-                    <div class="col-span-3"><label class="text-[10px] font-bold uppercase text-slate-400">Nom</label><input type="text" id="csm-name" class="input-field font-bold" placeholder="Le Spot Caché" required></div>
-                </div>
-
-                <div><label class="text-[10px] font-bold uppercase text-slate-400">Lien Google Maps (Extraction Auto GPS)</label><input type="text" id="csm-link" class="input-field text-blue-600 text-xs" onchange="parseMapsLink(this.value)" placeholder="Collez le lien ici..."></div>
-
-                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-2 rounded border border-slate-100">
-                    <div><label class="text-[10px] font-bold uppercase text-slate-400">Lat</label><input type="text" id="csm-lat" class="input-field text-xs bg-white" readonly></div>
-                    <div><label class="text-[10px] font-bold uppercase text-slate-400">Lon</label><input type="text" id="csm-lon" class="input-field text-xs bg-white" readonly></div>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div><label class="text-[10px] font-bold uppercase text-slate-400">Ville / Zone</label><input type="text" id="csm-city" class="input-field" placeholder="Ex: Centre-Ville"></div>
-                    <div>
-                        <label class="text-[10px] font-bold uppercase text-slate-400">Catégorie</label>
-                        <select id="csm-cat" class="input-field">
-                            <option value="Chill">🍃 Chill</option>
-                            <option value="Vue">👀 Vue</option>
-                            <option value="Eau">💧 Eau</option>
-                            <option value="Abri">☔ Abri</option>
-                            <option value="Autre">⚪ Autre</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div><label class="text-[10px] font-bold uppercase text-slate-400">Observations</label><textarea id="csm-desc" class="input-field h-20" placeholder="Infos pratiques..."></textarea></div>
-
-                <div class="flex gap-3 pt-2">
-                    <button type="button" onclick="document.getElementById('cali-spot-modal').classList.add('hidden')" class="flex-1 py-3 border border-slate-300 rounded-xl text-slate-500 font-bold">Annuler</button>
-                    <button type="submit" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-500">Sauvegarder</button>
-                </div>
-            </form>
-        </div>
-    </div>
+	        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6">
+	            <h3 id="csm-title" class="text-2xl font-bold text-slate-800 mb-4">Nouveau Lieu</h3>
+	            <form onsubmit="handleCaliSpotSubmit(event)" class="space-y-4">
+	                
+	                <input type="hidden" id="spot-id-input">
+	                
+	                <input type="hidden" id="csm-type"> 
+	                
+	                <div class="grid grid-cols-4 gap-4">
+	                    <div class="col-span-1"><label class="text-[10px] font-bold uppercase text-slate-400">Emoji</label><input type="text" id="csm-emoji" class="input-field text-center text-2xl" placeholder="📍" required></div>
+	                    <div class="col-span-3"><label class="text-[10px] font-bold uppercase text-slate-400">Nom</label><input type="text" id="csm-name" class="input-field font-bold" placeholder="Le Spot Caché" required></div>
+	                </div>
+	
+	                <div><label class="text-[10px] font-bold uppercase text-slate-400">Lien Google Maps (Extraction Auto GPS)</label><input type="text" id="csm-link" class="input-field text-blue-600 text-xs" onchange="parseMapsLink(this.value)" placeholder="Collez le lien ici..."></div>
+	
+	                <div class="grid grid-cols-2 gap-4 bg-slate-50 p-2 rounded border border-slate-100">
+	                    <div><label class="text-[10px] font-bold uppercase text-slate-400">Lat</label><input type="text" id="csm-lat" class="input-field text-xs bg-white" readonly></div>
+	                    <div><label class="text-[10px] font-bold uppercase text-slate-400">Lon</label><input type="text" id="csm-lon" class="input-field text-xs bg-white" readonly></div>
+	                </div>
+	
+	                <div class="grid grid-cols-2 gap-4">
+	                    <div><label class="text-[10px] font-bold uppercase text-slate-400">Ville / Zone</label><input type="text" id="csm-city" class="input-field" placeholder="Ex: Centre-Ville"></div>
+	                    <div>
+	                        <label class="text-[10px] font-bold uppercase text-slate-400">Catégorie</label>
+	                        <select id="csm-cat" class="input-field">
+	                            <option value="Chill">🍃 Chill</option>
+	                            <option value="Vue">👀 Vue</option>
+	                            <option value="Eau">💧 Eau</option>
+	                            <option value="Abri">☔ Abri</option>
+	                            <option value="Autre">⚪ Autre</option>
+	                        </select>
+	                    </div>
+	                </div>
+	
+	                <div><label class="text-[10px] font-bold uppercase text-slate-400">Observations</label><textarea id="csm-desc" class="input-field h-20" placeholder="Infos pratiques..."></textarea></div>
+	
+	                <div class="flex gap-3 pt-2">
+	                    <button type="button" onclick="document.getElementById('cali-spot-modal').classList.add('hidden')" class="flex-1 py-3 border border-slate-300 rounded-xl text-slate-500 font-bold">Annuler</button>
+	                    <button type="submit" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-500">Sauvegarder</button>
+	                </div>
+	            </form>
+	        </div>
+	    </div>
 
         <!-- MODAL Wishlist -->
         <div id="wish-modal" class="hidden fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
