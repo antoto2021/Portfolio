@@ -251,7 +251,7 @@
             c.innerHTML = '';
             document.getElementById('empty-state').classList.toggle('hidden', collection.length > 0);
             
-            [...collection].reverse().forEach(i => {*
+            [...collection].reverse().forEach(i => {
 				const imgSrc = (i.photos && i.photos.length) ? getImageSrc(i.photos[0]) : null;
                 const p = imgSrc ? `<img src="${imgSrc}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center text-3xl opacity-30">${i.category === 'hash' ? '🍫' : '🥦'}</div>`;
                 const h = `
