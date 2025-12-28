@@ -169,7 +169,7 @@
 		    // Triggers Cali Team
 		    if(viewId === 'cali-friends') loadCaliMembers();
 		    if(viewId === 'cali-spots') loadCaliLocations('spot');
-		    if(viewId === 'cali-utils') loadCaliLocations('util');
+		    if(viewId === 'cali-wishlist') loadCaliLocations('wish');
 		    if(viewId === 'cali-signal') {
 		        loadCaliSignals();
 		        loadCaliLocations('spot'); // Pour afficher la liste de sélection
@@ -1231,115 +1231,174 @@
 		    } catch(e) { alert("Erreur : " + e.message); }
 		}
 		
-		// 3. Gestion des SPOTS & UTILES
-		let currentCaliType = 'spot'; // 'spot' ou 'util'
-		
-		function openSpotForm(type) {
-		    currentCaliType = type;
-		    const modal = document.getElementById('cali-spot-modal');
-		    document.getElementById('csm-title').innerText = type === 'spot' ? "Nouveau Spot 📍" : "Nouveau Service 🚰";
-		    document.getElementById('csm-type').value = type;
-		    document.getElementById('csm-emoji').value = type === 'spot' ? "📍" : "🚰";
-		    
-		    // Reset form
-		    document.getElementById('csm-name').value = "";
-		    document.getElementById('csm-link').value = "";
-		    document.getElementById('csm-lat').value = "";
-		    document.getElementById('csm-lon').value = "";
-		    document.getElementById('csm-city').value = "";
-		    document.getElementById('csm-desc').value = "";
-		    
-		    modal.classList.remove('hidden');
-		}
-		
-		function parseMapsLink(url) {
-		    // Regex pour extraire lat/lon des liens Google Maps
-		    const regex = /(-?\d+\.\d+)[,\/!](-?\d+\.\d+)/;
-		    const match = url.match(regex);
-		    if (match && match.length >= 3) {
-		        document.getElementById('csm-lat').value = match[1];
-		        document.getElementById('csm-lon').value = match[2];
-		    }
-		}
-		
-		async function handleCaliSpotSubmit(e) {
-		    e.preventDefault();
-		    const type = document.getElementById('csm-type').value;
-		    
-		    const data = {
-		        type: type,
-		        emoji: document.getElementById('csm-emoji').value,
-		        name: document.getElementById('csm-name').value,
-		        mapsLink: document.getElementById('csm-link').value,
-		        lat: document.getElementById('csm-lat').value,
-		        lon: document.getElementById('csm-lon').value,
-		        city: document.getElementById('csm-city').value || "Zone inconnue",
-		        category: document.getElementById('csm-cat').value,
-		        desc: document.getElementById('csm-desc').value,
-		        addedBy: myUid,
-		        createdAt: Date.now()
-		    };
-		    
-		    try {
-		        const { collection, addDoc } = window.firebaseFuncs;
-		        const { db } = firebaseInstance;
-		        // On sauvegarde dans la sous-collection 'locations'
-		        await addDoc(collection(db, 'groups', CALI_GROUP_ID, 'locations'), data);
-		        
-		        document.getElementById('cali-spot-modal').classList.add('hidden');
-		        loadCaliLocations(type); // Recharger la liste correspondante
-		    } catch(e) { alert("Erreur sauvegarde: " + e.message); }
-		}
-		
-		async function loadCaliLocations(targetType) {
-		    const listId = targetType === 'spot' ? 'cali-spots-list' : 'cali-utils-list';
-		    const container = document.getElementById(listId);
-		    if(!container) return;
-		    
-		    container.innerHTML = '<div class="wn-loader"></div>';
-		    
-		    try {
-		        const { collection, getDocs, query, where } = window.firebaseFuncs;
-		        const { db } = firebaseInstance;
-		        
-		        // On récupère tout ce qui correspond au type (spot ou util)
-		        const q = query(collection(db, 'groups', CALI_GROUP_ID, 'locations'), where("type", "==", targetType));
-		        const snap = await getDocs(q);
-		        
-		        container.innerHTML = '';
-		        if (snap.empty) { container.innerHTML = '<div class="text-center text-slate-400 italic">Rien ici pour le moment.</div>'; return; }
-		        
-		        const items = [];
-		        snap.forEach(d => items.push({id: d.id, ...d.data()}));
-		        
-		        // Tri par ville puis nom
-		        items.sort((a,b) => a.city.localeCompare(b.city));
-		        
-		        items.forEach(item => {
-		            const html = `
-		            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-start gap-3 hover:border-blue-300 transition relative">
-		                <div class="text-3xl">${item.emoji}</div>
-		                <div class="flex-1 min-w-0">
-		                    <div class="flex justify-between">
-		                        <h3 class="font-bold text-slate-800 truncate">${escapeHTML(item.name)}</h3>
-		                        <span class="text-[10px] font-bold bg-slate-100 px-2 py-1 rounded text-slate-500 h-fit">${escapeHTML(item.city)}</span>
-		                    </div>
-		                    <p class="text-xs text-slate-500 italic mt-1 line-clamp-2">${escapeHTML(item.desc)}</p>
-		                    ${item.lat ? `<a href="${item.mapsLink || '#'}" target="_blank" class="mt-2 inline-block text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">🗺️ Y aller</a>` : ''}
-		                </div>
-		                ${targetType === 'spot' ? `<button onclick="activateCaliSignal('${item.id}', '${escapeHTML(item.name)}')" class="absolute bottom-2 right-2 text-rose-500 text-xs font-bold border border-rose-200 px-2 py-1 rounded hover:bg-rose-50">📡 Signal</button>` : ''}
-		            </div>`;
-		            container.insertAdjacentHTML('beforeend', html);
-		        });
-		        
-		        // Si on est dans le menu Signal, on charge aussi la liste des spots pour pouvoir cliquer dessus
-		        if (targetType === 'spot') {
-		             const signalList = document.getElementById('cali-signal-spots-list');
-		             if(signalList) signalList.innerHTML = container.innerHTML; // Astuce : on duplique le contenu généré
-		        }
-		
-		    } catch(e) { console.error(e); }
-		}
+	// 3. Gestion des SPOTS & WISHLIST
+			let currentCaliType = 'spot'; // 'spot' ou 'wish'
+			let allCaliSpotsCache = []; // Cache pour le filtrage local
+			
+			function openSpotForm(type) {
+			    currentCaliType = type;
+			    const modal = document.getElementById('cali-spot-modal');
+			    
+			    // Configuration dynamique du titre et de l'emoji
+			    const config = {
+			        spot: { title: "Nouveau Spot 📍", emoji: "📍" },
+			        wish: { title: "Nouvelle Envie 🧞", emoji: "🧞" }
+			    };
+			    
+			    document.getElementById('csm-title').innerText = config[type].title;
+			    document.getElementById('csm-type').value = type;
+			    document.getElementById('csm-emoji').value = config[type].emoji;
+			    
+			    // Reset form
+			    document.getElementById('csm-name').value = "";
+			    document.getElementById('csm-link').value = "";
+			    document.getElementById('csm-lat').value = "";
+			    document.getElementById('csm-lon').value = "";
+			    document.getElementById('csm-city').value = "";
+			    document.getElementById('csm-desc').value = "";
+			    
+			    modal.classList.remove('hidden');
+			}
+			
+			function parseMapsLink(url) {
+			    const regex = /(-?\d+\.\d+)[,\/!](-?\d+\.\d+)/;
+			    const match = url.match(regex);
+			    if (match && match.length >= 3) {
+			        document.getElementById('csm-lat').value = match[1];
+			        document.getElementById('csm-lon').value = match[2];
+			    }
+			}
+			
+			async function handleCaliSpotSubmit(e) {
+			    e.preventDefault();
+			    const type = document.getElementById('csm-type').value;
+			    
+			    const data = {
+			        type: type,
+			        emoji: document.getElementById('csm-emoji').value,
+			        name: document.getElementById('csm-name').value,
+			        mapsLink: document.getElementById('csm-link').value,
+			        lat: document.getElementById('csm-lat').value,
+			        lon: document.getElementById('csm-lon').value,
+			        city: document.getElementById('csm-city').value || "Zone inconnue",
+			        category: document.getElementById('csm-cat').value,
+			        desc: document.getElementById('csm-desc').value,
+			        addedBy: myUid,
+			        createdAt: Date.now()
+			    };
+			    
+			    try {
+			        const { collection, addDoc } = window.firebaseFuncs;
+			        const { db } = firebaseInstance;
+			        await addDoc(collection(db, 'groups', CALI_GROUP_ID, 'locations'), data);
+			        
+			        document.getElementById('cali-spot-modal').classList.add('hidden');
+			        loadCaliLocations(type); 
+											
+			    } catch(e) { alert("Erreur sauvegarde: " + e.message); }
+			}
+
+async function loadCaliLocations(targetType) {
+    // Détermination du conteneur
+    const listId = targetType === 'spot' ? 'cali-spots-list' : 'cali-wishlist-list';
+    const container = document.getElementById(listId);
+    if(!container) return;
+    
+    container.innerHTML = '<div class="wn-loader"></div>';
+    
+    try {
+        const { collection, getDocs, query, where } = window.firebaseFuncs;
+        const { db } = firebaseInstance;
+        
+        // Requête Firebase
+        const q = query(collection(db, 'groups', CALI_GROUP_ID, 'locations'), where("type", "==", targetType));
+        const snap = await getDocs(q);
+        
+        container.innerHTML = '';
+        if (snap.empty) { container.innerHTML = '<div class="text-center text-slate-400 italic">Rien ici pour le moment.</div>'; return; }
+        
+        // Stockage en mémoire pour le filtrage
+        const items = [];
+        snap.forEach(d => items.push({id: d.id, ...d.data()}));
+        
+        // Tri par défaut (Ville)
+        items.sort((a,b) => a.city.localeCompare(b.city));
+        
+        if (targetType === 'spot') {
+            allCaliSpotsCache = items; // Sauvegarde pour les filtres
+            renderDynamicFilters(items); // Générer les boutons de filtre
+        }
+        
+        renderLocationList(items, container);
+        
+        // Si menu signal, on charge la liste pour la sélection
+        if (targetType === 'spot') {
+             const signalList = document.getElementById('cali-signal-spots-list');
+             if(signalList) signalList.innerHTML = container.innerHTML;
+        }
+
+    } catch(e) { console.error(e); }
+}
+
+// Génération des boutons de filtre (Seulement si des items existent)
+function renderDynamicFilters(items) {
+    const filterContainer = document.querySelector('#view-cali-spots .no-scrollbar');
+    if (!filterContainer) return;
+
+    // Récupérer les catégories uniques présentes
+    const categories = [...new Set(items.map(i => i.category))];
+    
+    // HTML de base (Bouton "Tout")
+    let html = `<button onclick="filterSpots('all')" class="px-4 py-1 bg-slate-800 text-white rounded-full text-xs font-bold whitespace-nowrap transition transform active:scale-95">Tout</button>`;
+    
+    // Ajout des catégories trouvées
+    const catColors = { 'Chill': 'emerald', 'Vue': 'blue', 'Eau': 'cyan', 'Abri': 'slate', 'Autre': 'gray' };
+    
+    categories.forEach(cat => {
+        const color = catColors[cat] || 'gray';
+        html += `<button onclick="filterSpots('${cat}')" class="px-4 py-1 bg-${color}-100 text-${color}-800 rounded-full text-xs font-bold whitespace-nowrap transition transform active:scale-95 border border-${color}-200">${cat}</button>`;
+    });
+    
+    filterContainer.innerHTML = html;
+}
+
+// Fonction de filtrage active
+function filterSpots(category) {
+    const container = document.getElementById('cali-spots-list');
+    let filteredItems = allCaliSpotsCache;
+    
+    if (category !== 'all') {
+        filteredItems = allCaliSpotsCache.filter(i => i.category === category);
+    }
+    
+    renderLocationList(filteredItems, container);
+}
+
+// Fonction d'affichage générique (Spots & Wishlist)
+function renderLocationList(items, container) {
+    container.innerHTML = '';
+    items.forEach(item => {
+        const isSpot = item.type === 'spot';
+        const borderColor = isSpot ? 'border-slate-100' : 'border-purple-100';
+        const hoverColor = isSpot ? 'hover:border-blue-300' : 'hover:border-purple-300';
+        
+        const html = `
+        <div class="bg-white p-4 rounded-xl shadow-sm border ${borderColor} flex items-start gap-3 ${hoverColor} transition relative">
+            <div class="text-3xl">${item.emoji}</div>
+            <div class="flex-1 min-w-0">
+                <div class="flex justify-between">
+                    <h3 class="font-bold text-slate-800 truncate">${escapeHTML(item.name)}</h3>
+                    <span class="text-[10px] font-bold bg-slate-100 px-2 py-1 rounded text-slate-500 h-fit">${escapeHTML(item.city)}</span>
+                </div>
+                <p class="text-xs text-slate-500 italic mt-1 line-clamp-2">${escapeHTML(item.desc)}</p>
+                ${item.lat ? `<a href="${item.mapsLink || '#'}" target="_blank" class="mt-2 inline-block text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded">🗺️ Y aller</a>` : ''}
+            </div>
+            ${isSpot ? `<button onclick="activateCaliSignal('${item.id}', '${escapeHTML(item.name)}')" class="absolute bottom-2 right-2 text-rose-500 text-xs font-bold border border-rose-200 px-2 py-1 rounded hover:bg-rose-50">📡 Signal</button>` : ''}
+        </div>`;
+        container.insertAdjacentHTML('beforeend', html);
+    });
+}
+
 		
 		// 4. Gestion du SIGNAL (Live)
 		async function activateCaliSignal(spotId, spotName) {
