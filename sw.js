@@ -1,4 +1,4 @@
-const CACHE_NAME = 'green-codex-v7';
+const CACHE_NAME = 'green-codex-v8';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
