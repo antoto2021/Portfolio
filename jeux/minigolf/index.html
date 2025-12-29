@@ -1,1 +1,28 @@
-<h1>Mini Golf</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mini-Golf - Cali Team</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="ui-layer">
+        <div class="top-bar">
+            <a href="../../index.html" class="btn-back">⬅ Retour</a>
+            <div class="score-board">Coups : <span id="stroke-count">0</span></div>
+        </div>
+        
+        <div id="win-screen" class="hidden">
+            <h1>TROU EN UN ! ⛳</h1>
+            <p>Score final : <span id="final-score">0</span></p>
+            <button onclick="resetGame()">Rejouer</button>
+        </div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
