@@ -1392,6 +1392,40 @@
 		        alert("Erreur suppression : " + e.message);
 		    }
 		}
+
+		// Fonction pour ajouter un membre au groupe (Cali Team)
+		async function addMemberToCali() {
+		    // 1. Vérification de sécurité
+		    if (!firebaseInstance) {
+		        alert("Erreur : Vous n'êtes pas connecté à la base de données. Vérifiez votre connexion internet.");
+		        return;
+		    }
+		
+		    // 2. Demande de l'ID
+		    const newUid = prompt("Entrez l'ID Unique de l'ami à ajouter :");
+		    
+		    // Si l'utilisateur annule ou laisse vide, on arrête
+		    if (!newUid || newUid.trim() === "") return;
+		
+		    try {
+		        const { doc, updateDoc, arrayUnion } = window.firebaseFuncs;
+		        const { db } = firebaseInstance;
+		        
+		        // 3. Envoi à Firebase
+		        // On utilise arrayUnion pour ajouter sans effacer les autres
+		        await updateDoc(doc(db, 'groups', CALI_GROUP_ID), {
+		            members: arrayUnion(newUid.trim())
+		        });
+		        
+		        // 4. Confirmation et rechargement de la liste
+		        alert("Membre ajouté avec succès !");
+		        loadCaliMembers();
+		        
+		    } catch(e) {
+		        console.error("Erreur Ajout Membre:", e);
+		        alert("Erreur lors de l'ajout : " + e.message);
+		    }
+		}
 	// 3. Gestion des SPOTS & WISHLIST
 			let currentCaliType = 'spot'; // 'spot' ou 'wish'
 			let allCaliSpotsCache = []; // Cache pour le filtrage local
