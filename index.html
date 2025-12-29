@@ -140,7 +140,7 @@
                         <div>
                             <h2 class="section-title !text-white mb-2" data-editable="col_title">My Collection</h2>
                             <p class="text-slate-400" data-editable="col_sub">Votre carnet de dégustation</p>
-                            <p class="text-xs text-slate-500 mt-1">Stockage :<span id="storage-used" class="ml-2 text-slate-400 text-[10px] uppercase font-bold tracking-wider opacity-80"> (Calcul...)</span></p>
+                            <p class="text-xs text-slate-500 mt-1">Stockage :<span id="storage-used" class="ml-2 text-slate-400 text-[10px] uppercase font-bold tracking-wider opacity-80">(Calcul...)</span></p>
                         </div>
                         <button onclick="showView('collection')" class="bg-emerald-500 hover:bg-emerald-400 text-white px-6 py-3 rounded-xl font-bold transition shadow-lg flex items-center gap-2"><span>📂</span> Ouvrir Portfolio</button>
                     </div>
@@ -172,13 +172,8 @@
 
             <!-- FAMILIES SECTION -->
             <section>
-				<div class="flex items-center gap-2 mb-2 cursor-pointer" onclick="toggleSection('famille-cards')">
-                	<div class="mb-8 border-b border-slate-200 pb-4"><h2 class="section-title" data-editable="fam_title">Les Familles Fondamentales</h2><p class="text-slate-600 max-w-3xl text-justify" data-editable="fam_desc">Le marché moderne se divise en deux grands royaumes : la fleur brute et les extractions. Chacun possède ses méthodes, ses rituels et ses profils aromatiques distincts.</p></div>
-				</div>
-				<div class="text-lg leading-relaxed text-slate-600 text-justify mb-4" data-editable="intro_teaser">
-                	<h3 class="text-xl font-bold text-slate-700 mb-4 flex items-center" data-editable="fam_sub1">🧪 Concentrés (Hash)</h3>
-				</div>
-<div class="collapsible-wrapper">				
+                <div class="mb-8 border-b border-slate-200 pb-4"><h2 class="section-title" data-editable="fam_title">Les Familles Fondamentales</h2><p class="text-slate-600 max-w-3xl text-justify" data-editable="fam_desc">Le marché moderne se divise en deux grands royaumes : la fleur brute et les extractions. Chacun possède ses méthodes, ses rituels et ses profils aromatiques distincts.</p></div>
+                <h3 class="text-xl font-bold text-slate-700 mb-4 flex items-center" data-editable="fam_sub1">🧪 Concentrés (Hash)</h3>	
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                     <div onclick="showDetail('hash_dry')" class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500 card-interactive group"><div class="flex justify-between"> <div class="text-4xl mb-4">🏜️</div> <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded h-fit">TRADITION</span> </div>
                     <h3 class="text-xl font-bold text-slate-800 group-hover:text-amber-600">Dry Sift</h3>
@@ -646,10 +641,6 @@
                 </form>
             </div>
         </div>
-</div>
-<button onclick="toggleSection('famille-cards')" class="absolute bottom-2 left-2 text-emerald-600 p-2 hover:bg-emerald-50 rounded-full transition">
-    <svg class="w-6 h-6 toggle-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-</button>
 
 	<!-- Le script est dans le fichier app.js -->
 
