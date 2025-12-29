@@ -400,10 +400,10 @@
                     <span class="bubble-title">Wishlist</span>
                     <span class="text-xs mt-1 opacity-70">À chasser</span>
                 </div>
-                <div onclick="showView('cali-signal')" class="bubble-card bg-rose-50 text-rose-700 border-rose-100">
-                    <span class="bubble-icon">📡</span>
-                    <span class="bubble-title">Signal</span>
-                    <span class="text-xs mt-1 opacity-70">Live Position</span>
+				<div onclick="showView('cali-games')" class="bubble-card bg-orange-50 text-orange-700 border-orange-100">
+                    <span class="bubble-icon">🎮</span>
+                    <span class="bubble-title">Jeux</span>
+                    <span class="text-xs mt-1 opacity-70">Arcade Multi</span>
                 </div>
             </div>
         </div>
@@ -446,26 +446,30 @@
             <div id="cali-wishlist-list" class="space-y-3"></div>
         </div>
 
-        <div id="view-cali-signal" class="hidden fade-in pb-20">
+		<div id="view-cali-games" class="hidden fade-in pb-20">
             <div class="flex items-center gap-4 mb-6">
-                <button onclick="showView('cali-hub')" class="bg-rose-100 text-rose-600 p-2 rounded-full">⬅️</button>
-                <h2 class="text-2xl font-bold text-rose-900">Live Signal 📡</h2>
+                <button onclick="showView('cali-hub')" class="bg-orange-100 text-orange-600 p-2 rounded-full">⬅️</button>
+                <h2 class="text-2xl font-bold text-orange-900">Arcade Team 🎮</h2>
             </div>
 
-            <div class="bg-white border-2 border-rose-100 p-6 rounded-2xl text-center mb-8 shadow-sm">
-                <p class="text-slate-400 text-xs font-bold uppercase mb-2">Ma Position Actuelle</p>
-                <h3 id="my-signal-status" class="text-xl font-black text-slate-800 mb-1">Inconnue</h3>
-                <p id="my-signal-time" class="text-xs text-slate-500 mb-4">-</p>
-                <button onclick="clearMySignal()" class="text-rose-500 text-xs font-bold underline">Me rendre invisible</button>
+            <div class="bg-white border-2 border-orange-100 p-6 rounded-2xl text-center mb-8 shadow-sm relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-20 h-20 bg-orange-100 rounded-full blur-[30px] opacity-50 -mr-4 -mt-4"></div>
+                <p class="text-slate-400 text-xs font-bold uppercase mb-2">Mon Statut</p>
+                <h3 id="my-game-status" class="text-lg font-black text-slate-300 mb-4">Inactif</h3>
+                <button onclick="quitGameLobby()" class="text-orange-500 text-xs font-bold underline hover:text-orange-700">Je ne joue plus</button>
             </div>
 
-            <h3 class="font-bold text-slate-700 mb-3 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> En direct (Dernières 24h)</h3>
-            <div id="cali-active-signals" class="space-y-3 mb-8">
-                <div class="text-center text-slate-400 text-sm italic">Personne n'est actif.</div>
+            <div class="mb-8">
+                <h3 class="font-bold text-slate-700 mb-3 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> En salle d'attente
+                </h3>
+                <div id="cali-active-players" class="space-y-2">
+                    </div>
             </div>
 
-            <h3 class="font-bold text-slate-700 mb-3">Se signaler à un Spot :</h3>
-            <div id="cali-signal-spots-list" class="grid grid-cols-1 gap-2"></div>
+            <h3 class="font-bold text-slate-700 mb-4">Choisissez un jeu :</h3>
+            <div id="cali-games-list" class="grid grid-cols-3 gap-3">
+                </div>
         </div>
 
     </main>
